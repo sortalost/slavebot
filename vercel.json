@@ -8,7 +8,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "src/bot.py"
+        "dest": "src/bot.pylp"
       }
     ]
   }
