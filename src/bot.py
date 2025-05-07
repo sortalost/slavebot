@@ -1,7 +1,7 @@
 import os
 import discord
 from discord.ext import commands
-import discordSuperUtils
+import Paginator
 from datetime import datetime 
 
 TOKEN = os.getenv("TOKEN")
@@ -91,10 +91,10 @@ async def echo(ctx, *, content: str):
 @bot.command(name="snipe", aliases=['snp'])
 async def snipe(ctx: commands.Context):
     """get deleted messages"""
-    snp = gen_snipe(ctx, ctx.guild.id) 
-    if snp == []:
-        return await ctx.send("nothing to snipe", delete_after=5)
-    await discordSuperUtils.ButtonsPageManager(ctx, snp, button_color=3).run()
+    snipes = gen_snipe(ctx, ctx.guild.id) 
+    if snipes == []:
+        return await ctx.send("nothing to snipe")
+    await Paginator.Simple().start(ctx, pages=snipes)
 
 
 print("running???")
