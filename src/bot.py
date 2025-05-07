@@ -61,6 +61,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    if message.author==bot.user:
+        return
     if 'nigga' in message.content.lower():
         await message.reply("no u nigga")
     await bot.process_commands(message)
