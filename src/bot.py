@@ -2,14 +2,14 @@ import os
 import discord
 from discord.ext import commands
 import discordSuperUtils
-from datetime import datetime  # You were using datetime without importing
+from datetime import datetime 
 
 TOKEN = os.getenv("TOKEN")
 LOG = 877473404117209191
 prefix = "."
 
 intents = discord.Intents.default()
-intents.message_content = True  # You'll likely need this for message access
+intents.message_content = True
 
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or(prefix),
@@ -61,9 +61,9 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if 'nigga' in message.content.lower():  # Fixed missing 'in' keyword
+    if 'nigga' in message.content.lower():
         await message.reply("no u nigga")
-    await bot.process_commands(message)  # Needed or commands won't work
+    await bot.process_commands(message)
 
 
 @bot.event
@@ -75,7 +75,7 @@ async def on_command_error(ctx, error):
 
 @bot.command()
 async def ping(ctx):
-    """Get latency"""
+    """get latency"""
     await ctx.send(bot.latency)
 
 
@@ -90,7 +90,8 @@ async def echo(ctx, *, content: str):
 
 @bot.command(name="snipe", aliases=['snp'])
 async def snipe(ctx: commands.Context):
-    snp = gen_snipe(ctx, ctx.guild.id)  # Removed 'self.'
+    """get deleted messages"""
+    snp = gen_snipe(ctx, ctx.guild.id) 
     if snp == []:
         return await ctx.send("nothing to snipe", delete_after=5)
     await discordSuperUtils.ButtonsPageManager(ctx, snp, button_color=3).run()
