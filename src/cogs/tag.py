@@ -108,7 +108,6 @@ class Tagging(commands.Cog):
 		u = g(ctx.guild.members,id=int(tag['author']))
 		eb=discord.Embed(description=f"{con}",colour=discord.Colour.random(),timestamp=ctx.message.created_at)
 		eb.title=name.upper()
-		eb.colour=u.colour
 		await ctx.send(embed=eb)
 				
 	@commands.command(name="helptag")
