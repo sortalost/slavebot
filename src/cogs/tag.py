@@ -7,7 +7,7 @@ from discord.utils import get as g
 import difflib as dfb
 
 
-main_bank = "alltags.json"
+main_bank = "src/files/alltags.json"
 
 
 def load_all_tags():
