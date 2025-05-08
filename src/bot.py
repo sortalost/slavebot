@@ -33,7 +33,7 @@ async def on_ready():
                 y.append(filename[:-3])
                 r.append(str(e))
     print("up and running")
-    timestamp = time.time()
+    timestamp = int(time.time())
     em = discord.Embed(title=f"running", color=discord.Color.green())
     em.add_field(name="time", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
     em.description = f"success:{', '.join(x)}\nfails: {', '.join(y)}\nreasons:{'\n-'.join(r)}"
