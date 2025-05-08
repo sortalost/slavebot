@@ -1,4 +1,5 @@
 import os
+import asyncio
 import discord
 from discord.ext import commands
 import datetime
@@ -7,7 +8,11 @@ import time
 TOKEN = os.getenv("TOKEN")
 LOG = 877473404117209191
 prefix = "."
-
+_vars = {
+    x:[],
+    y:[],
+    r:[]
+}
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -21,25 +26,14 @@ bot = commands.Bot(
 
 @bot.event
 async def on_ready():
-    x = []
-    y = []
-    r = []
-    for filename in os.listdir(f"./src/cogs"):
-        if filename.endswith(".py"):
-            try:
-                await bot.load_extension(f"cogs.{filename[:-3]}")
-                x.append(filename[:-3])
-            except Exception as e:
-                y.append(filename[:-3])
-                r.append(str(e))
     print("up and running")
     timestamp = int(time.time())
     em = discord.Embed(title=f"running", color=discord.Color.green())
     em.add_field(name="time", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
     em.description = f"""\
-    success:{', '.join(x)}
-    fails: {', '.join(y)}
-    reasons:{' | '.join(r)}
+    success:{', '.join(_vars[x])}
+    fails: {', '.join(_vars[y])}
+    reasons:{' | '.join(_vars[r])}
     """
     await bot.get_channel(LOG).send(embed=em)
 
@@ -150,4 +144,30 @@ class Owner(commands.Cog):
 
 
 
-bot.run(TOKEN)
+        x = []
+        y = []
+        r = []
+        for filename in os.listdir(f"./src/cogs"):
+            if filename.endswith(".py"):
+                try:
+                    await bot.load_extension(f"cogs.{filename[:-3]}")
+                    x.append(filename[:-3])
+                except Exception as e:
+                    y.append(filename[:-3])
+                    r.append(str(e))
+
+
+async def main():
+    async with bot:
+        for filename in os.listdir(f"./src/cogs"):
+            if filename.endswith(".py"):
+                try:
+                    await bot.load_extension(f"cogs.{filename[:-3]}")
+                    _vars[x].append(filename[:-3])
+                except Exception as e:
+                    _vars[y].append(filename[:-3])
+                    _vars[r].append(str(e))
+        await bot.run(TOKEN)
+
+if __name__ == "__main__":
+    asyncio.run(main())
