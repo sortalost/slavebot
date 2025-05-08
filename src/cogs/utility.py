@@ -28,7 +28,7 @@ class Utils(commands.Cog):
 			embed.add_field(name="user", value=m.author.mention, inline=False)
 			embed.add_field(name="content", value=f"{m.content}\n", inline=False)
 			embed.add_field(name="channel", value=m.channel.mention, inline=False)
-			embed.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar_url)
+			embed.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar)
 			eb.append(embed)
 		return eb[::-1]
 
