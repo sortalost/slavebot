@@ -95,6 +95,8 @@ class Tagging(commands.Cog):
 			return await ctx.invoke(self.bot.get_command("deltag"),name=name[4:])
 		elif name.lower().startswith("edit"):
 			return await ctx.invoke(self.bot.get_command("editag"),name=name[5:])
+		elif name.lower().startswith("info"):
+			return await ctx.invoke(self.bot.get_command("infotag"),name=name[5:])
 		elif name.lower().startswith("help"):
 			return await ctx.invoke(self.bot.get_command("helptag"))
 		elif name.lower().startswith("all"):
@@ -224,8 +226,8 @@ class Tagging(commands.Cog):
 		owner = self.bot.fetch_user(tag['author'])
 		em = discord.Embed(colour=discord.Colour.random())
 		em.add_field(name="tag", value=name)
-		em.add_field(name="owner", value=owner.mention)
-		em.set_author(name=owner.name, icon_url=owner.avatar)
+		em.add_field(name="owner", value=owner)
+		em.set_author(name=owner)
 		await ctx.send(embed=em)
 
 	@commands.command()
