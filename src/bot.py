@@ -24,7 +24,7 @@ async def on_ready():
     x = []
     y = []
     r=dict()
-    for filename in os.listdir(f"./cogs"):
+    for filename in os.listdir(f"./src/cogs"):
         if filename.endswith(".py"):
             try:
                 bot.load_extension(f"cogs.{filename[:-3]}");x.append(filename[:-3])
