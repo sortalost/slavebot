@@ -1,7 +1,6 @@
 import os
 import discord
 from discord.ext import commands
-from datetime import datetime 
 import time
 
 TOKEN = os.getenv("TOKEN")
@@ -35,7 +34,7 @@ async def on_ready():
     print("up and running")
     timestamp = time.time()
     em = discord.Embed(title=f"running", color=discord.Color.green())
-    em.add_field(name="time", content=" <t:{timestamp}> - <t:{timestamp}:R>")
+    em.add_field(name="time", value=" <t:{timestamp}> - <t:{timestamp}:R>")
     em.description = f"success:{x}\nfails: {y}\nreasons:{r}"
     await bot.get_channel(LOG).send(embed=em)
 
@@ -49,7 +48,7 @@ async def on_message(message):
 
 @bot.event
 async def on_command_error(ctx, error):
-    em = discord.Embed(title="you broke me idiot", color=discord.Color.red(), timestamp=datetime.utcnow())
+    em = discord.Embed(title="you broke me idiot", color=discord.Color.red(), timestamp=time.time())
     em.description = f"```{error}```"
     await ctx.send(embed=em)
 
