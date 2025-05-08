@@ -106,7 +106,7 @@ class Tagging(commands.Cog):
 		except KeyError:
 			return await ctx.send(f"no such tag exists\n{self.disambiguate(name,ctx.guild.id)}",delete_after=20)
 		u = g(ctx.guild.members,id=int(tag['author']))
-		eb=discord.Embed(description=f"{con}",colour=u.colour,timestamp=ctx.message.created_at)
+		eb=discord.Embed(description=f"{con}",colour=discord.Colour.random(),timestamp=ctx.message.created_at)
 		eb.title=name.upper()
 		eb.colour=u.colour
 		await ctx.send(embed=eb)
@@ -156,7 +156,7 @@ class Tagging(commands.Cog):
 			await msg.delete()
 			await msg0.delete()
 		except:pass
-		self.remote.push_remote_data(db.load_file(self.fp))
+		self.remote.push_remote_data(load_all_tags())
 		await ctx.send(embed=discord.Embed(description=f"**{g(self.bot.emojis,name='tag')}tag\"{name.title()}\" by {ctx.author.mention} created{g(self.bot.emojis,name='tag')}**"))
 	
 	@commands.command(name="deltag")
@@ -173,7 +173,7 @@ class Tagging(commands.Cog):
 			return await ctx.send("you dont own this tag",delete_after=7)
 		rem_tag(ctx.guild.id,name)
 		tag_num = len(get_guild_tags(ctx.guild.id))
-		self.remote.push_remote_data(db.load_file(self.fp))
+		self.remote.push_remote_data(load_all_tags())
 		await ctx.send(f"tag \"{name}\" has been successfully deleted\ntotal tags for this server: {tag_num}",delete_after=10)
 	
 	
@@ -207,7 +207,7 @@ class Tagging(commands.Cog):
 			await val.delete()
 		except:
 			pass
-		self.remote.push_remote_data(db.load_file(self.fp))
+		self.remote.push_remote_data(load_all_tags())
 		await ctx.send(embed=discord.Embed(title=f"tag edited.{g(self.bot.emojis,name='BlobBroke')}"))
 	
 	@commands.command()
