@@ -51,11 +51,11 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
-@bot.event
-async def on_command_error(ctx, error):
-    em = discord.Embed(title="you broke me idiot", color=discord.Color.red(), timestamp=datetime.datetime.now())
-    em.description = f"```{error}```"
-    await ctx.send(embed=em)
+# @bot.event
+# async def on_command_error(ctx, error):
+#     em = discord.Embed(title="you broke me idiot", color=discord.Color.red(), timestamp=datetime.datetime.now())
+#     em.description = f"```{error}```"
+#     await ctx.send(embed=em)
 
 
 @bot.command()
