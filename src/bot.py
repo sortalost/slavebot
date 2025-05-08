@@ -22,7 +22,7 @@ bot = commands.Bot(
 async def on_ready():
     x = []
     y = []
-    r=dict()
+    r = []
     for filename in os.listdir(f"./src/cogs"):
         if filename.endswith(".py"):
             try:
@@ -30,12 +30,12 @@ async def on_ready():
                 x.append(filename[:-3])
             except Exception as e:
                 y.append(filename[:-3])
-                r.update({filename[:-3]:e})
+                r.update(e)
     print("up and running")
     timestamp = time.time()
     em = discord.Embed(title=f"running", color=discord.Color.green())
-    em.add_field(name="time", value=" <t:{timestamp}> - <t:{timestamp}:R>")
-    em.description = f"success:{x}\nfails: {y}\nreasons:{r}"
+    em.add_field(name="time", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
+    em.description = f"success:{', '.join(x)}\nfails: {', '.join(y)}\nreasons:{'\n-'.join(r)}"
     await bot.get_channel(LOG).send(embed=em)
 
 
