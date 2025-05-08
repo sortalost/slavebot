@@ -26,12 +26,12 @@ async def on_ready():
     r = []
     for filename in os.listdir(f"./src/cogs"):
         if filename.endswith(".py"):
-            try:
-                await bot.load_extension(f"cogs.{filename[:-3]}")
-                x.append(filename[:-3])
-            except Exception as e:
-                y.append(filename[:-3])
-                r.append(str(e))
+            # try:
+            await bot.load_extension(f"cogs.{filename[:-3]}")
+            x.append(filename[:-3])
+            # except Exception as e:
+            #     y.append(filename[:-3])
+            #     r.append(str(e))
     print("up and running")
     timestamp = int(time.time())
     em = discord.Embed(title=f"running", color=discord.Color.green())
