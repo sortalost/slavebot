@@ -1,8 +1,8 @@
 import os
 import discord
 from discord.ext import commands
-import Paginator
 from datetime import datetime 
+import time
 
 TOKEN = os.getenv("TOKEN")
 LOG = 877473404117209191
@@ -19,52 +19,30 @@ bot = commands.Bot(
     strip_after_prefix=True
 )
 
-lastmsg = {}
-
-
-def gen_snipe(ctx, guild):
-    eb = []
-    try:
-        snipes = lastmsg[guild]
-    except KeyError:
-        lastmsg.update({guild: []})
-        return []
-    if snipes == []:
-        return []
-    i = 0
-    for m in snipes:
-        i += 1
-        embed = discord.Embed(title=f"snipe {i}/{len(snipes)}")
-        embed.add_field(name="from", value=m.author.mention, inline=False)
-        embed.add_field(name="content", value=f"{m.content}\n", inline=False)
-        embed.add_field(name="in", value=m.channel.mention, inline=False)
-        embed.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar.url)
-        eb.append(embed)
-    return eb[::-1]
-
-
-@bot.event
-async def on_message_delete(message: discord.Message):
-    if message.author.bot:
-        return
-    try:
-        lastmsg[message.guild.id].append(message)
-    except KeyError:
-        lastmsg.update({message.guild.id: [message]})
-
-
 @bot.event
 async def on_ready():
+    x = []
+    y = []
+    r=dict()
+    for filename in os.listdir(f"./cogs"):
+        if filename.endswith(".py"):
+            try:
+                bot.load_extension(f"cogs.{filename[:-3]}");x.append(filename[:-3])
+                x.append(filename[:-3])
+            except Exception as e:
+                y.append(filename[:-3])
+                r.update({filename[:-3]:e})
     print("up and running")
-    await bot.get_channel(LOG).send("running")
+    timestamp = time.time()
+    em = discord.Embed(title=f"running <t:{timestamp}> - <t:{timestamp}:R>", color=discord.Color.green())
+    em.description = f"success:{x}\nfails: {y}\nreasons:{r}"
+    await bot.get_channel(LOG).send(embed=em)
 
 
 @bot.event
 async def on_message(message):
     if message.author==bot.user:
         return
-    if 'nigga' in message.content.lower():
-        await message.reply("no u nigga")
     await bot.process_commands(message)
 
 
@@ -90,14 +68,4 @@ async def echo(ctx, *, content: str):
     await ctx.send(content)
 
 
-@bot.command(name="snipe", aliases=['snp'])
-async def snipe(ctx: commands.Context):
-    """get deleted messages"""
-    snipes = gen_snipe(ctx, ctx.guild.id) 
-    if snipes == []:
-        return await ctx.send("nothing to snipe")
-    await Paginator.Simple().start(ctx, pages=snipes)
-
-
-print("running???")
 bot.run(TOKEN)
