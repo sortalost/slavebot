@@ -13,7 +13,7 @@ _vars = {
     'y':[],
     'r':[]
 }
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.message_content = True
 
 bot = commands.Bot(
