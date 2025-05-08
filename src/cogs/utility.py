@@ -54,7 +54,7 @@ class Utils(commands.Cog):
 	@commands.command(name="snipe",aliases=['snp'])
 	async def snipe(self, ctx: commands.Context):
 		snipes = self.gen_snipe(ctx, ctx.guild.id)
-        await ctx.send(embed=snipes[0])
+		await ctx.send(embed=snipes[0])
 
 
 
