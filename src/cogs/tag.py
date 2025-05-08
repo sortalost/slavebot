@@ -129,7 +129,7 @@ class Tagging(commands.Cog):
 **and**,
 `add`, `del`, `edit`, `all` and `help` are reserved.
 """
-		eb.set_footer(text=ctx.author.name,icon_url=ctx.author.avatar_url)
+		eb.set_footer(text=ctx.author.name,icon_url=ctx.author.avatar)
 		eb.timestamp=ctx.message.created_at
 		await ctx.send(embed=eb)
 
