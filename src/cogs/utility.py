@@ -5,7 +5,7 @@ from discord.ext import commands
 
 
 class Utils(commands.Cog):
-	"""utility cog"""
+	"""utility extension"""
 	def __init__(self, bot: commands.Bot):
 		self.bot = bot
 		self.logchannel = bot.get_channel(877473404117209191)
@@ -44,8 +44,9 @@ class Utils(commands.Cog):
 			self.lastmsg[message.guild.id].append(message)
 
 
-	@commands.command(name="snipe",aliases=['snp'])
+	@commands.command(name="snipe")
 	async def snipe(self, ctx: commands.Context):
+        """get deleted messages"""
 		snipes = self.gen_snipe(ctx, ctx.guild.id)
 		if snipes==[]:
 			return await ctx.send("nothing to snipe", delete_after=5)

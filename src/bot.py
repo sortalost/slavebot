@@ -62,6 +62,7 @@ async def ping(ctx):
 
 @bot.command()
 async def echo(ctx, *, content: str):
+    """i say what you say"""
     try:
         await ctx.message.delete()
     except:
