@@ -59,7 +59,7 @@ def is_tag(guild,tag):
 
 
 class Tagging(commands.Cog):
-    """Tag stuff"""
+	"""Tag stuff"""
 	def __init__(self, bot:commands.Bot):
 		self.bot=bot
 		self.fp=main_bank

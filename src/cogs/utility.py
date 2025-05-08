@@ -46,7 +46,7 @@ class Utils(commands.Cog):
 
 	@commands.command(name="snipe")
 	async def snipe(self, ctx: commands.Context):
-        """get deleted messages"""
+		"""get deleted messages"""
 		snipes = self.gen_snipe(ctx, ctx.guild.id)
 		if snipes==[]:
 			return await ctx.send("nothing to snipe", delete_after=5)
