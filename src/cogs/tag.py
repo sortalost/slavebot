@@ -80,7 +80,7 @@ class Tagging(commands.Cog):
 	@commands.Cog.listener()
 	async def on_ready(self):
 		start_tags = self.remote.get_remote_data()
-		await bot.get_channel(877473404117209191).send(start_tags)
+		await self.bot.get_channel(877473404117209191).send(start_tags)
 		with open(self.fp,'w') as f:
 			json.dump(start_tags, f, indent=4)
 
