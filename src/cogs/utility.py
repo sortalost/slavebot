@@ -51,12 +51,12 @@ class Utils(commands.Cog):
 	# 		return await ctx.send("nothing to snipe", delete_after=5)
 	# 	await Paginator.Simple().start(ctx, pages=snipes)
 
-	# @commands.command(name="snipe",aliases=['snp'])
-	# async def snipe(self, ctx: commands.Context):
-	# 	snipes = self.gen_snipe(ctx, ctx.guild.id)
-	# 	await ctx.send(embed=snipes[0])
+	@commands.command(name="snipe",aliases=['snp'])
+	async def snipe(self, ctx: commands.Context):
+		snipes = self.gen_snipe(ctx, ctx.guild.id)
+		await ctx.send(embed=snipes[0])
 
 
 
-def setup(bot: commands.Bot):
-	bot.add_cog(Utils(bot))
+async def setup(bot: commands.Bot):
+	await bot.add_cog(Utils(bot))
