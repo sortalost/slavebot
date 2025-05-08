@@ -153,7 +153,7 @@ async def main():
                 except Exception as e:
                     _vars['y'].append(filename[:-3])
                     _vars['r'].append(str(e))
-        await bot.run(TOKEN)
+        await bot.start(TOKEN)
 
 if __name__ == "__main__":
     asyncio.run(main())
