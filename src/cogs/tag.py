@@ -172,7 +172,7 @@ class Tagging(commands.Cog):
 		rem_tag(ctx.guild.id,name)
 		tag_num = len(get_guild_tags(ctx.guild.id))
 		self.remote.push_remote_data(load_all_tags())
-		await ctx.send(f"tag \"{name}\" has been successfully deleted\ntotal tags for this server: {tag_num}",delete_after=10)
+		await ctx.send(f"tag \"{name}\" has been successfully deleted\ntotal tags for this server: {tag_num}")
 	
 	
 	@commands.command(name="editag")
