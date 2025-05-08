@@ -36,7 +36,11 @@ async def on_ready():
     timestamp = int(time.time())
     em = discord.Embed(title=f"running", color=discord.Color.green())
     em.add_field(name="time", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
-    em.description = f"success:{', '.join(x)}\nfails: {', '.join(y)}\nreasons:{'\n-'.join(r)}"
+    em.description = f"""\
+    success:{', '.join(x)}
+    fails: {', '.join(y)}
+    reasons:{' | '.join(r)}
+    """
     await bot.get_channel(LOG).send(embed=em)
 
 
