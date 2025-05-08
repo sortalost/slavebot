@@ -6,15 +6,14 @@ import os
 
 
 GITHUB_TOKEN = os.getenv('githubtk')
-EMAIL = os.getenv('email')
 REPO = "slavebot"
 
 
 class DB:
-    def __init__(self,token=GITHUB_TOKEN, branch="database",author=("sortalost",EMAIL),reponame=f"sortalost/{REPO}", main="main.json"):
+    def __init__(self,token=GITHUB_TOKEN, branch="database",author=("sortalost",".."),reponame=f"sortalost/{REPO}", main="main.json"):
         self.token=token
         self.branch=branch
-        self.author=InputGitAuthor(author[0],author[1])
+        self.author=InputGitAuthor("sortalost",str(os.getenv('email')))
         self.github=Github(self.token)
         self.repo=self.github.get_repo(reponame)
         self.main=main
