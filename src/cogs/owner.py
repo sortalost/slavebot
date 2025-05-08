@@ -1,85 +1,9 @@
-import os
+import io
+import textwrap
+import traceback
+from contextlib import redirect_stdout
 import discord
 from discord.ext import commands
-import datetime
-import time
-
-TOKEN = os.getenv("TOKEN")
-LOG = 877473404117209191
-prefix = "."
-
-intents = discord.Intents.default()
-intents.message_content = True
-
-bot = commands.Bot(
-    command_prefix=commands.when_mentioned_or(prefix),
-    case_insensitive=True,
-    owner_id=817359568945545226,
-    intents=intents,
-    strip_after_prefix=True
-)
-
-@bot.event
-async def on_ready():
-    x = []
-    y = []
-    r = []
-    for filename in os.listdir(f"./src/cogs"):
-        if filename.endswith(".py"):
-            try:
-                await bot.load_extension(f"cogs.{filename[:-3]}")
-                x.append(filename[:-3])
-            except Exception as e:
-                y.append(filename[:-3])
-                r.append(str(e))
-    print("up and running")
-    timestamp = int(time.time())
-    em = discord.Embed(title=f"running", color=discord.Color.green())
-    em.add_field(name="time", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
-    em.description = f"""\
-    success:{', '.join(x)}
-    fails: {', '.join(y)}
-    reasons:{' | '.join(r)}
-    """
-    await bot.get_channel(LOG).send(embed=em)
-
-
-@bot.event
-async def on_message(message):
-    if message.author==bot.user:
-        return
-    await bot.process_commands(message)
-
-
-# @bot.event
-# async def on_command_error(ctx, error):
-#     em = discord.Embed(title="you broke me idiot", color=discord.Color.red(), timestamp=datetime.datetime.now())
-#     em.description = f"```{error}```"
-#     await ctx.send(embed=em)
-
-
-@bot.command()
-async def ping(ctx):
-    """get latency"""
-    await ctx.send(bot.latency)
-
-
-@bot.command()
-async def echo(ctx, *, content: str):
-    """i say what you say"""
-    try:
-        await ctx.message.delete()
-    except:
-        pass
-    await ctx.send(content)
-
-
-def cleanup_code(self, content):
-    """Automatically removes code blocks from the code."""
-    if content.startswith('```') and content.endswith('```'):
-        return '\n'.join(content.split('\n')[1:-1])
-    return content.strip('` \n')
-    
 
 class Owner(commands.Cog):
     def __init__(self, bot):
@@ -122,7 +46,7 @@ class Owner(commands.Cog):
         except Exception as e:
             value = stdout.getvalue()
             try:
-                await ctx.message.add_reaction(discord.utils.get(self.bot.emojis, name="SayNo"))
+                await ctx.message.add_reaction(discord.utils.get(self.bot.emojis, name="shhAngryUS"))
             except:
                 pass
             await ctx.send(embed=discord.Embed(
@@ -149,5 +73,5 @@ class Owner(commands.Cog):
                 ).set_footer(text=ctx.author.name, icon_url=ctx.author.avatar.url))
 
 
-
-bot.run(TOKEN)
+async def setup(bot):
+	await bot.add_cog(Owner(bot))
