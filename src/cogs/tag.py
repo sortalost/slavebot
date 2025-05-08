@@ -79,8 +79,9 @@ class Tagging(commands.Cog):
 	
 	@commands.Cog.listener()
 	async def on_ready(self):
-		self.remote.sync(self.fp, prefer="cloud")
-
+		start_tags = self.remote.get_remote_data()
+		with open(self.fp,'w') as f:
+			json.dump(start_tags, f, indent=4)
 
 
 	@commands.command(aliases=['t'], help="tag the stuff you want")
