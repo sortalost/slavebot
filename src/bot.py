@@ -49,7 +49,7 @@ async def on_message(message):
 
 @bot.event
 async def on_command_error(ctx, error):
-    em = discord.Embed(title="you broke me idiot", color=discord.Color.red(), timestamp=datetime.datetime())
+    em = discord.Embed(title="you broke me idiot", color=discord.Color.red(), timestamp=datetime.datetime.now())
     em.description = f"```{error}```"
     await ctx.send(embed=em)
 
