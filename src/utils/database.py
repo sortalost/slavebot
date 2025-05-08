@@ -5,7 +5,7 @@ import os
 
 
 
-GITHUB_TOKEN = os.getenv('githubtk')
+GITHUB_TOKEN = os.getenv('GITHUBTK')
 REPO = "junkyard"
 
 
