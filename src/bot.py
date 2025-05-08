@@ -31,7 +31,7 @@ async def on_ready():
                 x.append(filename[:-3])
             except Exception as e:
                 y.append(filename[:-3])
-                r.append(e)
+                r.append(str(e))
     print("up and running")
     timestamp = time.time()
     em = discord.Embed(title=f"running", color=discord.Color.green())
