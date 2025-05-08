@@ -223,11 +223,11 @@ class Tagging(commands.Cog):
 			await ctx.send("no such tag found",delete_after=7)
 			return
 		tag = get_tag(ctx.guild.id,name)
-		owner = self.bot.fetch_user(tag['author'])
+		owner = await self.bot.fetch_user(tag['author'])
 		em = discord.Embed(colour=discord.Colour.random())
 		em.add_field(name="tag", value=name)
-		em.add_field(name="owner", value=owner)
-		em.set_author(name=owner)
+		em.add_field(name="owner", value=owner.mention)
+		em.set_author(name=owner.name, icon_url=owner.avatar)
 		await ctx.send(embed=em)
 
 	@commands.command()
