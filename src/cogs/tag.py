@@ -106,9 +106,7 @@ class Tagging(commands.Cog):
 		except KeyError:
 			return await ctx.send(f"no such tag exists\n{self.disambiguate(name,ctx.guild.id)}",delete_after=20)
 		u = g(ctx.guild.members,id=int(tag['author']))
-		eb=discord.Embed(description=f"{con}",colour=discord.Colour.random(),timestamp=ctx.message.created_at)
-		eb.title=name.upper()
-		await ctx.send(embed=eb)
+		await ctx.send(con)
 				
 	@commands.command(name="helptag")
 	async def helptag(self,ctx):
@@ -121,12 +119,13 @@ class Tagging(commands.Cog):
 ```fix
 .tag [TAG]
 .tag all
-.tag add [TAG NAME]
-.tag delete [TAG NAME]
-.tag edit [EXISTING TAG NAME]
+.tag add [TAG]
+.tag delete [TAG]
+.tag edit [TAG]
+.tag info [TAG]
 ```
 **and**,
-`add`, `del`, `edit`, `all` and `help` are reserved.
+`add`, `del`, `edit`, `all`, `info` and `help` are reserved.
 """
 		eb.set_footer(text=ctx.author.name,icon_url=ctx.author.avatar)
 		eb.timestamp=ctx.message.created_at
@@ -208,16 +207,34 @@ class Tagging(commands.Cog):
 			pass
 		self.remote.push_remote_data(load_all_tags())
 		await ctx.send(embed=discord.Embed(title=f"tag edited.{g(self.bot.emojis,name='BlobBroke')}"))
-	
+
+
+	@commands.command(name="infotag")
+	async def _info(self,ctx,*,name:str):
+		c = init_guild(ctx.guild.id)
+		if isinstance(c, bool):
+			return await ctx.send(f"tag manager initialized, try again.",delete_after=17)
+		chk = is_tag(ctx.guild.id,name)
+		if chk is False:
+			await ctx.send("no such tag found",delete_after=7)
+			return
+		tag = get_tag(ctx.guild.id,name)
+        owner = self.bot.fetch_user(tag['author'])
+        em = discord.Embed(colour=discord.Colour.random())
+        em.add_field(name="tag", value=name)
+        em.add_field(name="owner", value=owner.mention)
+        em.set_author(name=owner.name, icon_url=owner.avatar)
+        await ctx.send(embed=em)
+
 	@commands.command()
 	async def all_tags(self,ctx):
 		c = init_guild(ctx.guild.id)
 		if isinstance(c, bool):return await ctx.send(f"tag manager initialized, try again.",delete_after=17)
 		tags=list(get_guild_tags(ctx.guild.id))
 		try:
-			await ctx.send(embed=discord.Embed(description=", ".join(tags)))
+			await ctx.send(embed=discord.Embed(description="\n *".join(tags)))
 		except:
-			await ctx.send(embed=discord.Embed(description=g(self.bot.emojis,name="shhAngryUS")))
+			await ctx.send(embed=discord.Embed(description=f'no tags {g(self.bot.emojis,name="shhAngryUS"))}')
 
 
 async def setup(bot):
