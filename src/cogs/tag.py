@@ -232,7 +232,7 @@ class Tagging(commands.Cog):
 		if isinstance(c, bool):return await ctx.send(f"tag manager initialized, try again.",delete_after=17)
 		tags=list(get_guild_tags(ctx.guild.id))
 		try:
-			await ctx.send(embed=discord.Embed(description="\n *".join(tags)))
+			await ctx.send(embed=discord.Embed(description="\n • ".join(tags)))
 		except:
 			await ctx.send(embed=discord.Embed(description=f"no tags {g(self.bot.emojis,name='shhAngryUS')}"))
 
