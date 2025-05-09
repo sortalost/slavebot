@@ -26,8 +26,8 @@ class ChatBot(commands.Cog):
 			bmsg = await msg.reply(get(str(msg.content),ctx.author.id))
 			self.msgs.get(ctx.guild.id).append(msg)
 			self.msgs.get(ctx.guild.id).append(bmsg)
-        convolength = len(self.msgs.get(ctx.guild.id))
-        self.msgs = {}
+		convolength = len(self.msgs.get(ctx.guild.id))
+		self.msgs = {}
 		await ctx.send(f"Conversation Length, {convolength}")
 		# try:
 		# 	for m in self.msgs.get(ctx.guild.id):
