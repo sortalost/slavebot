@@ -71,6 +71,25 @@ class Owner(commands.Cog):
                     description=f"**Process Exited with Status Code `0`**\n```py\n{value}{ret}\n```",
                     colour=0x00FF00
                 ).set_footer(text=ctx.author.name, icon_url=ctx.author.avatar.url))
+    
+    
+    @commands.command(name="verbosity", aliases=['vb'])
+    @commands.is_owner()
+    """set verbosity of `.chat` replies"""
+    def verbosity(self,verbose=None):
+        try:
+            if verbose is None:
+                return await ctx.send(self.bot.verbosity+"% verbosity.")
+            old = self.bot.verbosity
+            new = int(verbose)
+        except ValueError:
+            return await ctx.send("verbosity should be a number between 1 and 100, not"+str(type(verbose)))
+        except AttributeError:
+            old = 30
+        if new>100 or new<1:
+            return await ctx.send("verbosity should be between 1 and 100")
+        self.bot.verbosity=new
+        return await ctx.send(f"Verbosity changed from {old}% to {self.bot.verbosity}%")
 
 
 async def setup(bot):

@@ -5,14 +5,14 @@ import os
 
 conversation_history = {}
 
-async def get(input_text: str, specific_user: str):
+async def get(input_text: str, specific_user: str, bot):
     api_url = os.getenv('chatapiurl')
     headers = {"Content-Type": "application/json"}
     if specific_user not in conversation_history:
         conversation_history[specific_user] = []
     conversation_history[specific_user].append({"role": "user", "text": input_text})
     context = "\n".join([f"{message['role']}: {message['text']}" for message in conversation_history[specific_user]]) + "\nassistant:"
-    prompt = f"Conversation so far:\n{context}\nPlease reply naturally and keep verbosity to 20%; reply as if youre talking to them. ONLY THE REPLY!"
+    prompt = f"Conversation so far:\n{context}\nPlease reply naturally and keep verbosity to {bot.verbosity}; reply as if youre talking to them. ONLY THE REPLY!"
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
     async with aiohttp.ClientSession() as session:
         async with session.post(api_url, json=payload, headers=headers) as response:
@@ -43,7 +43,7 @@ class ChatBot(commands.Cog):
 				await msg.reply("[-] user quits")
 				run=False
 				break
-			reply = await get(str(msg.content), ctx.author.id)
+			reply = await get(str(msg.content), ctx.author.id, self.bot)
 			bmsg = await msg.reply(reply)
 			self.msgs.get(ctx.guild.id).append(msg)
 			self.msgs.get(ctx.guild.id).append(bmsg)
