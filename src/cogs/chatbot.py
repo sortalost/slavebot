@@ -36,7 +36,7 @@ class ChatBot(commands.Cog):
 				await msg.reply("[-] user quits")
 				run=False
 				break
-            reply = await get(str(msg.content), ctx.author.id)
+			reply = await get(str(msg.content), ctx.author.id)
 			bmsg = await msg.reply(reply)
 			self.msgs.get(ctx.guild.id).append(msg)
 			self.msgs.get(ctx.guild.id).append(bmsg)
