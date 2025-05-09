@@ -84,8 +84,6 @@ class Owner(commands.Cog):
             new = int(verbose)
         except ValueError:
             return await ctx.send("verbosity should be a number between 1 and 100, not"+str(type(verbose)))
-        except AttributeError:
-            old = 30
         if new>100 or new<1:
             return await ctx.send("verbosity should be between 1 and 100")
         self.bot.verbosity=new

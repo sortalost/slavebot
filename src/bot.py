@@ -27,6 +27,8 @@ bot = commands.Bot(
     strip_after_prefix=True
 )
 
+bot.verbosity = 30
+
 @bot.event
 async def on_ready():
     print("up and running")
