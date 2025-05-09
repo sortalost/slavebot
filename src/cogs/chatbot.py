@@ -32,6 +32,7 @@ class ChatBot(commands.Cog):
 	
 	@commands.command(name="chat", aliases=["c"])
 	async def chatbot(self,ctx):
+		"""chat with ai"""
 		self.msgs.update({ctx.guild.id:[]})
 		m1 = await ctx.reply("hey (send `QUIT` to end conversation)")
 		self.msgs.get(ctx.guild.id).append(m1)
