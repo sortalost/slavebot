@@ -12,7 +12,7 @@ async def get(input_text: str, specific_user: str, bot):
         conversation_history[specific_user] = []
     conversation_history[specific_user].append({"role": "user", "text": input_text})
     context = "\n".join([f"{message['role']}: {message['text']}" for message in conversation_history[specific_user]]) + "\nassistant:"
-    prompt = f"Conversation so far:\n{context}\nPlease reply naturally and keep verbosity to {bot.verbosity}; reply as if youre talking to them. ONLY THE REPLY!"
+    prompt = f"Conversation so far:\n{context}\nPlease reply naturally and keep verbosity to {bot.verbosity}%; reply as if youre talking to them. ONLY THE REPLY!"
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
     async with aiohttp.ClientSession() as session:
         async with session.post(api_url, json=payload, headers=headers) as response:
