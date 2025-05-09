@@ -61,7 +61,7 @@ class Utils(commands.Cog):
 		except:
 			return await ctx.send("usage is `.purge 16` to delete last 16 messages")
 		num=num+1
-		await ctx.channel.purge(limit=NUMBER)
+		await ctx.channel.purge(limit=num)
 
 
 
