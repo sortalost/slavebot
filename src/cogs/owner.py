@@ -75,8 +75,8 @@ class Owner(commands.Cog):
     
     @commands.command(name="verbosity", aliases=['vb'])
     @commands.is_owner()
-    """set verbosity of `.chat` replies"""
     def verbosity(self,verbose=None):
+        """set verbosity of `.chat` replies"""
         try:
             if verbose is None:
                 return await ctx.send(self.bot.verbosity+"% verbosity.")
