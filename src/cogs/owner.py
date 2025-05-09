@@ -79,7 +79,7 @@ class Owner(commands.Cog):
         """set verbosity of `.chat` replies"""
         try:
             if verbose is None:
-                return await ctx.send(self.bot.verbosity+"% verbosity.")
+                return await ctx.send(f"{self.bot.verbosity}% verbosity.")
             old = self.bot.verbosity
             new = int(verbose)
         except ValueError:
