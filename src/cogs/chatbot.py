@@ -3,7 +3,7 @@ import aiohttp
 import json
 import os
 
-conversation_history = {}
+conversation_history = bot.conversation_history
 
 async def get(input_text: str, specific_user: str, bot):
     api_url = os.getenv('chatapiurl')

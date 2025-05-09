@@ -28,6 +28,7 @@ bot = commands.Bot(
 )
 
 bot.verbosity = 30
+bot.conversation_history = {}
 
 @bot.event
 async def on_ready():
