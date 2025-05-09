@@ -52,7 +52,7 @@ class ChatBot(commands.Cog):
 			bmsg = await msg.reply(reply)
 			self.msgs.get(ctx.guild.id).append(msg)
 			self.msgs.get(ctx.guild.id).append(bmsg)
-			self.remote.push_remote_data(self.conversation_history)
+			self.remote.push_remote_data(self.bot.conversation_history)
 		convolength = len(self.msgs.get(ctx.guild.id))
 		self.msgs = {}
 		await ctx.send(f"Conversation Length, {convolength}")
