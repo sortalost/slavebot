@@ -67,7 +67,7 @@ class Tagging(commands.Cog):
     @commands.group(invoke_without_command=True, aliases=['t'], help="tag the stuff you want")
     async def tag(self, ctx, *, name=None):
         if name is None:
-            return await ctx.invoke(self.bot.get_command("helptag"))
+            return await ctx.invoke(self.bot.get_command("tag help"))
 
         c = init_guild(ctx.guild.id)
         if isinstance(c, bool):
