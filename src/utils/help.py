@@ -1,6 +1,7 @@
 from discord.ext import commands
 import discord
-from paginator import Paginator  # replace with your actual paginator import
+from paginator import Paginator
+
 
 class Help(commands.HelpCommand):
     def __init__(self, no=[]):
@@ -12,14 +13,19 @@ class Help(commands.HelpCommand):
         prefix = self.clean_prefix
         embeds = []
         for cog, cmds in mapping.items():
-            cmds = [c for c in cmds if not c.hidden and c.name not in self.no]
-            if not cmds:
+            visible_cmds = [c for c in cmds if not c.hidden and c.name not in self.no]
+            if not visible_cmds:
                 continue
-            embed = discord.Embed(title=cog.qualified_name if cog else "uncategorized", color=discord.Color.blurple(), description="")
-            for command in cmds:
-                embed.description += f"`{prefix}{command.name}` - {command.help or '**no description**'}\n"
+            embed = discord.Embed(title=cog.qualified_name if cog else "Uncategorized", color=discord.Color.blurple(), description="")
+            for command in visible_cmds:
+                if isinstance(command, commands.Group):
+                    for sub in command.commands:
+                        if not sub.hidden and sub.name not in self.no:
+                            full_name = f"{command.qualified_name} {sub.name}"
+                            embed.description += f"`{prefix}{full_name}` - {sub.help or 'No description'}\n"
+                else:
+                    embed.description += f"`{prefix}{command.qualified_name}` - {command.help or 'No description'}\n"
             embeds.append(embed)
         if not embeds:
-            await ctx.send("No commands available.")
-            return
+            return await ctx.send("No commands available.")
         await Paginator.Simple().start(ctx, pages=embeds)
