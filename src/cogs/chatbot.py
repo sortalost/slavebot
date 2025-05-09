@@ -3,19 +3,26 @@ import aiohttp
 import json
 import os
 
+conversation_history = {}
+
 async def get(input_text: str, specific_user: str):
     api_url = os.getenv('chatapiurl')
-    headers = {"Content-Type": "application/json",}
-    prompt = f"{input_text}\n - from a user id \"{specific_user}\"; reply to them!"
+    headers = {"Content-Type": "application/json"}
+    if specific_user not in conversation_history:
+        conversation_history[specific_user] = []
+    conversation_history[specific_user].append({"role": "user", "text": input_text})
+    context = "\n".join([f"{message['role']}: {message['text']}" for message in conversation_history[specific_user]]) + "\nassistant:"
+    prompt = f"Conversation so far:\n{context}\nPlease reply concisely and naturally as if youre talking to them. ONLY THE REPLY!"
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
     async with aiohttp.ClientSession() as session:
         async with session.post(api_url, json=payload, headers=headers) as response:
             if response.status == 200:
                 data = await response.json()
-                content = data.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', "No response content.")
+                content = data.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', "No response.")
+                conversation_history[specific_user].append({"role": "assistant", "text": content})
                 return content
             else:
-                return f"error: {response.status}, {await response.text()}"
+                return f"Error: {response.status}, {await response.text()}"
 
 
 class ChatBot(commands.Cog):
