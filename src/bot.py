@@ -4,6 +4,8 @@ import discord
 from discord.ext import commands
 import datetime
 import time
+from utils.help import Help
+
 
 TOKEN = os.getenv("TOKEN")
 LOG = 877473404117209191
@@ -19,6 +21,7 @@ intents.message_content = True
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or(prefix),
     case_insensitive=True,
+    help_command=Help(no=["dodis"]),
     owner_id=817359568945545226,
     intents=intents,
     strip_after_prefix=True
