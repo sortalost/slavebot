@@ -11,9 +11,9 @@ class ChatBot(commands.Cog):
 		self.msgs = {}
 		self.remote = database.DB(main="aiconvos.json")
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        self.bot.conversation_history = self.remote.get_remote_data()
+	@commands.Cog.listener()
+	async def on_ready(self):
+		self.bot.conversation_history = self.remote.get_remote_data()
 
 	async def get(self, input_text: str, specific_user: str):
 		api_url = os.getenv('chatapiurl')
