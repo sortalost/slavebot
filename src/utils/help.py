@@ -10,7 +10,7 @@ class Help(commands.HelpCommand):
 
     async def send_bot_help(self, mapping):
         ctx = self.context
-        prefix = self.clean_prefix
+        prefix = ctx.clean_prefix
         embeds = []
         for cog, cmds in mapping.items():
             visible_cmds = [c for c in cmds if not c.hidden and c.name not in self.no]
