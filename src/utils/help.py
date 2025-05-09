@@ -1,6 +1,6 @@
 from discord.ext import commands
 import discord
-from paginator import Paginator
+import Paginator
 
 
 class Help(commands.HelpCommand):
