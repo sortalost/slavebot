@@ -53,6 +53,17 @@ class Utils(commands.Cog):
 		await Paginator.Simple().start(ctx, pages=snipes)
 
 
+	@commands.has_permissions(manage_messages=True)
+	@commands.command(name='purge',aliases=['pg'],help='Purge(Delete) Messages')
+	async def purge(self, ctx, number):
+		try:
+			num = int(number)
+		except:
+			return await ctx.send("usage is `.purge 16` to delete last 16 messages")
+		NUMBER=NUMBER+1
+		await ctx.channel.purge(limit=NUMBER)
+
+
 
 
 async def setup(bot: commands.Bot):

@@ -75,7 +75,7 @@ class Owner(commands.Cog):
     
     @commands.command(name="verbosity", aliases=['vb'])
     @commands.is_owner()
-    async def verbosity(self,verbose=None):
+    async def verbosity(self,ctx,verbose=None):
         """set verbosity of `.chat` replies"""
         try:
             if verbose is None:
