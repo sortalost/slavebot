@@ -7,7 +7,7 @@ from io import BytesIO
 import Paginator
 
 class Utils(commands.Cog):
-    """Utility commands <:ver_devUS:869794681251332177>"""
+    """Utility commands"""
     
     def __init__(self, bot: commands.Bot):
         self.bot = bot

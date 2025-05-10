@@ -4,18 +4,14 @@ import traceback
 from contextlib import redirect_stdout
 import discord
 from discord.ext import commands
+from utils.tools import cleanup_code
+
 
 class Developer(commands.Cog):
     """only for the developer <:ver_devUS:869794681251332177>"""
     def __init__(self, bot):
         self.bot = bot
         self._last_result = None
-
-    def cleanup_code(self, content):
-        """Automatically remove code blocks from the code."""
-        if content.startswith("```") and content.endswith("```"):
-            return "\n".join(content.strip("`").split("\n")[1:])
-        return content.strip("` \n")
 
     @commands.command(pass_context=True, aliases=['dds'])
     @commands.is_owner()
@@ -92,4 +88,4 @@ class Developer(commands.Cog):
 
 
 async def setup(bot):
-	await bot.add_cog(Developer(bot))
+    await bot.add_cog(Developer(bot))
