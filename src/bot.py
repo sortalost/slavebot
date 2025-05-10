@@ -21,12 +21,11 @@ intents.message_content = True
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or(prefix),
     case_insensitive=True,
-    help_command=Help(no=["dodis"]),
     owner_id=817359568945545226,
     intents=intents,
     strip_after_prefix=True
 )
-
+bot.help_command=Help(no=["dodis"],bot)
 bot.verbosity = 30
 bot.conversation_history = {}
 
