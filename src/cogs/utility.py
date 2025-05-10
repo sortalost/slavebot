@@ -71,11 +71,11 @@ class Utils(commands.Cog):
             await ctx.guild.create_role(name=name, color=0x00FF00)
             try:
                 await ctx.send(embed=discord.Embed(title=f"New Role: {name}",
-                                                   description=f"**{name} has been created\nAdd Members to this role via ```{prefix}GiveRole [USER] [ROLE]```**",
+                                                   description=f"**{name} has been created\nAdd Members to this role via ```{ctx.prefix}GiveRole [USER] [ROLE]```**",
                                                    color=0xFF0000))
             except:
                 await ctx.send(embed=discord.Embed(title=f"New Role: {name}",
-                                                   description=f"**{name} has been created\nAdd Members to this role via ```{prefix}GiveRole [USER] [ROLE]```**",
+                                                   description=f"**{name} has been created\nAdd Members to this role via ```{ctx.prefix}GiveRole [USER] [ROLE]```**",
                                                    color=0xFF0000).set_footer(
                     text=f"You got this message as I wasn't able to send messages in {ctx.channel.name}"))
         else:
@@ -86,7 +86,7 @@ class Utils(commands.Cog):
     # @NewRole.error
     # async def errorrole(self, ctx, error):
     #     if isinstance(error, commands.MissingRequiredArgument):
-    #         await ctx.send(embed=discord.Embed(title=":x:PARAMETER MISSING:x:", description=f'```{prefix}newrole [NAME]```',
+    #         await ctx.send(embed=discord.Embed(title=":x:PARAMETER MISSING:x:", description=f'```{ctx.prefix}newrole [NAME]```',
     #                                            color=0xFF0000))
     #     else:
     #         try:
@@ -130,12 +130,12 @@ class Utils(commands.Cog):
     # @newemoji.error
     # async def newmeoji_error(self, ctx, error):
     #     if isinstance(error, commands.MissingRequiredArgument):
-    #         await ctx.send(embed=discord.Embed(title=":x:PARAMETER MISSING:x:", description=f'```{prefix}newemoji [URL] [NAME]```', color=0xFF0000))
+    #         await ctx.send(embed=discord.Embed(title=":x:PARAMETER MISSING:x:", description=f'```{ctx.prefix}newemoji [URL] [NAME]```', color=0xFF0000))
     #     elif isinstance(error, discord.Forbidden):
     #         try:
-    #             await ctx.send(embed=discord.Embed(title=":x:MISSING PERMISSIONS:x:", description=f'```{prefix}newemoji [URL] [NAME]```\nLooks like I\'m Missing Some permissions:\n```{error}```', color=0xFF0000))
+    #             await ctx.send(embed=discord.Embed(title=":x:MISSING PERMISSIONS:x:", description=f'```{ctx.prefix}newemoji [URL] [NAME]```\nLooks like I\'m Missing Some permissions:\n```{error}```', color=0xFF0000))
     #         except:
-    #             await ctx.author.send(embed=discord.Embed(title=":x:MISSING PERMISSIONS:x:", description=f'```{prefix}newemoji [URL] [NAME]```\nLooks like I\'m Missing Some permissions:\n```{error}```', color=0xFF0000))
+    #             await ctx.author.send(embed=discord.Embed(title=":x:MISSING PERMISSIONS:x:", description=f'```{ctx.prefix}newemoji [URL] [NAME]```\nLooks like I\'m Missing Some permissions:\n```{error}```', color=0xFF0000))
 
     @commands.command(aliases=['de'])
     async def delemoji(self, ctx, *, emoji: discord.Emoji):
