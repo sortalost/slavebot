@@ -154,5 +154,34 @@ class Utils(commands.Cog):
             except Exception as e:
                 await ctx.send(embed=discord.Embed(title=f":o: Unable to delete emoji :o:", description=f"Error: {e}", color=0xFF0000))
 
+    @commands.command(name="emojis", help="List emojis the bot can access")
+    async def emojis(self, ctx, *emoji_names):
+        if emoji_names:
+            found = []
+            for name in emoji_names:
+                emoji = discord.utils.get(self.bot.emojis, name=name)
+                if emoji:
+                    found.append((emoji, emoji.guild.name))
+            if not found:
+                return await ctx.send("No matching emojis found.")
+            embed = discord.Embed(title="Matching Emojis", color=discord.Color.blurple())
+            for emoji, guild in found:
+                embed.add_field(name=guild, value=str(emoji), inline=True)
+            await ctx.send(embed=embed)
+        else:
+            guilds = {}
+            for emoji in self.bot.emojis:
+                if emoji.guild.name not in guilds:
+                    guilds[emoji.guild.name] = []
+                guilds[emoji.guild.name].append(str(emoji))
+            if not guilds:
+                return await ctx.send("No emojis available.")
+            embeds = []
+            for guild, emojis in guilds.items():
+                embed = discord.Embed(title=guild, description=" ".join(emojis), color=discord.Color.green())
+                embeds.append(embed)
+            await Paginator.Simple().start(ctx, pages=embeds)
+
+
 async def setup(bot: commands.Bot):
     await bot.add_cog(Utils(bot))
