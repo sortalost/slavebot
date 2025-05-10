@@ -21,7 +21,7 @@ class Help(commands.HelpCommand):
         e.add_field(name="Total", value=f"`{len(bot.all_commands)}`", inline=False)
         e.add_field(name="Categories", value=desc)
         e.set_thumbnail(url="https://cdn.discordapp.com/emojis/1370654693654663288.webp?size=96&animated=true")
-        embeds = [embed1]
+        embeds = [e]
         for cog, cmds in mapping.items():
             visible_cmds = [c for c in cmds if not c.hidden and c.name not in self.no]
             if not visible_cmds:
