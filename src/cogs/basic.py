@@ -69,7 +69,7 @@ source on [GitHub](<https://github.dev/sortalost/slavebot/>)
         em = discord.Embed(color=discord.Colour.blurple())
         em.title = "Tech Stack"
         em.add_field(name="discord.py", value=f"{dsc} `v{discord.__version__}`", inline=False)
-        em.add_field(name="python", value=f"{py} `{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}`", inline=False)
+        em.add_field(name="python", value=f"{pyt} `{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}`", inline=False)
         em.add_field(name=platform.system(), value=f"{ubn} `{distro}`", inline=False)
         em.add_field(name="Runs on", value=f"{rwy} [railway](<https://railway.com>)", inline=False)
         await ctx.send(embed=em)
