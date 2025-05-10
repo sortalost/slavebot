@@ -7,16 +7,16 @@ class Help(commands.HelpCommand):
     def __init__(self, no=[]):
         super().__init__()
         self.no = no
-        self.bot = self.context.bot
 
     async def send_bot_help(self, mapping):
         ctx = self.context
+        bot = self.context.bot
         prefix = ctx.clean_prefix
         desc = ""
         i = 0
-        for cog in self.bot.cogs:
+        for cog in bot.cogs:
             i+=1
-            desc+=f"{str(i)}. `{cog}` - {self.bot.cogs[cog].description}\n"
+            desc+=f"{str(i)}. `{cog}` - {bot.cogs[cog].description}\n"
         embed1 = discord.Embed(title="Categories", description = desc, color=discord.Color.random())
         embeds = [embed1]
         for cog, cmds in mapping.items():
