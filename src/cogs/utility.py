@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord.utils import get
 import sys
 from io import BytesIO
+import Paginator
 
 class Utils(commands.Cog):
     """Utility commands <:ver_devUS:869794681251332177>"""
