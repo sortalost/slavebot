@@ -92,4 +92,4 @@ class Developer(commands.Cog):
 
 
 async def setup(bot):
-	await bot.add_cog(Owner(bot))
+	await bot.add_cog(Developer(bot))

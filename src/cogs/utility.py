@@ -7,9 +7,6 @@ import sys
 import os
 
 
-NEWROLE_H = 'Create a new role in the server.'
-NEWEMOJI_H = 'Create a new emoji in the server.'
-DELEMOJI_H = 'Delete an emoji in the server.'
 
 class Utils(commands.Cog):
     """Utility commands <:ver_devUS:869794681251332177>"""
@@ -67,8 +64,9 @@ class Utils(commands.Cog):
         num = num + 1
         await ctx.channel.purge(limit=num)
 
-    @commands.command(help=NEWROLE_H)
-    async def NewRole(self, ctx, *, name):
+    @commands.command(aliases=['nr'])
+    async def newrole(self, ctx, *, name):
+		"""Create a new role in the server"""
         if ctx.author.guild_permissions.manage_roles:
             await ctx.guild.create_role(name=name, color=0x00FF00)
             try:
@@ -82,24 +80,25 @@ class Utils(commands.Cog):
                     text=f"You got this message as I wasn't able to send messages in {ctx.channel.name}"))
         else:
             await ctx.send(embed=discord.Embed(title=":x:PERMISSIONS:x:",
-                                               description='You don\'t have "Manage Roles" Permission!!!',
+                                               description='You don\'t have "Manage Roles" Permission',
                                                color=0xFF0000))
 
-    @NewRole.error
-    async def errorrole(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(embed=discord.Embed(title=":x:PARAMETER MISSING:x:", description=f'```{prefix}newrole [NAME]```',
-                                               color=0xFF0000))
-        else:
-            try:
-                await ctx.send(embed=discord.Embed(description=f"**Encountered Unknown Error(s)**```{sys.exc_info()}```\nPlease Report this error using `{prefix}Report [ERROR]`.\n\nPlease don't spam using this feature."))
-            except:
-                await ctx.author.send(f"Couldn't send this message in {ctx.message.channel.mention}, so...",
-                                      embed=discord.Embed(description=f"**Encountered Unknown Error**```{sys.exc_info()}```\nPlease Report this error using `{prefix}Report [ERROR]`.\n\nPlease Report this error using `{prefix}Report [ERROR]`.\n\nPlease don't spam using this feature."))
-            print(f"\n!!---!!\nERROR = {error}\nGUILD = {ctx.guild}\nUSER = {ctx.author} | {ctx.author.id}\n!!---!!\n")
+    # @NewRole.error
+    # async def errorrole(self, ctx, error):
+    #     if isinstance(error, commands.MissingRequiredArgument):
+    #         await ctx.send(embed=discord.Embed(title=":x:PARAMETER MISSING:x:", description=f'```{prefix}newrole [NAME]```',
+    #                                            color=0xFF0000))
+    #     else:
+    #         try:
+    #             await ctx.send(embed=discord.Embed(description=f"**Encountered Unknown Error(s)**```{sys.exc_info()}```\n"))
+    #         except:
+    #             await ctx.author.send(f"Couldn't send this message in {ctx.message.channel.mention}, so...",
+    #                                   embed=discord.Embed(description=f"**Encountered Unknown Error**```{sys.exc_info()}```"))
 
-    @commands.command(help=NEWEMOJI_H)
+
+    @commands.command(aliases=['ne'])
     async def newemoji(self, ctx, url: str, *, name):
+		"""Create a new emoji in the server"""
         guild = ctx.guild
         if ctx.author.guild_permissions.manage_emojis:
             async with aiohttp.ClientSession() as ses:
@@ -128,18 +127,19 @@ class Utils(commands.Cog):
         else:
             await ctx.send(embed=discord.Embed(title=":x:PERMISSIONS:x:", description='You don\'t have "Manage Emojis" Permission!!!', color=0xFF0000))
 
-    @newemoji.error
-    async def newmeoji_error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(embed=discord.Embed(title=":x:PARAMETER MISSING:x:", description=f'```{prefix}newemoji [URL] [NAME]```', color=0xFF0000))
-        elif isinstance(error, discord.Forbidden):
-            try:
-                await ctx.send(embed=discord.Embed(title=":x:MISSING PERMISSIONS:x:", description=f'```{prefix}newemoji [URL] [NAME]```\nLooks like I\'m Missing Some permissions:\n```{error}```', color=0xFF0000))
-            except:
-                await ctx.author.send(embed=discord.Embed(title=":x:MISSING PERMISSIONS:x:", description=f'```{prefix}newemoji [URL] [NAME]```\nLooks like I\'m Missing Some permissions:\n```{error}```', color=0xFF0000))
+    # @newemoji.error
+    # async def newmeoji_error(self, ctx, error):
+    #     if isinstance(error, commands.MissingRequiredArgument):
+    #         await ctx.send(embed=discord.Embed(title=":x:PARAMETER MISSING:x:", description=f'```{prefix}newemoji [URL] [NAME]```', color=0xFF0000))
+    #     elif isinstance(error, discord.Forbidden):
+    #         try:
+    #             await ctx.send(embed=discord.Embed(title=":x:MISSING PERMISSIONS:x:", description=f'```{prefix}newemoji [URL] [NAME]```\nLooks like I\'m Missing Some permissions:\n```{error}```', color=0xFF0000))
+    #         except:
+    #             await ctx.author.send(embed=discord.Embed(title=":x:MISSING PERMISSIONS:x:", description=f'```{prefix}newemoji [URL] [NAME]```\nLooks like I\'m Missing Some permissions:\n```{error}```', color=0xFF0000))
 
-    @commands.command(aliases=DELEMOJI_H, help=DELEMOJI_H)
+    @commands.command(aliases=['de'])
     async def delemoji(self, ctx, *, emoji: discord.Emoji):
+		"""Delete an emoji in the server."""
         guild = ctx.guild
         if ctx.author.guild_permissions.manage_emojis:
             try:
