@@ -93,18 +93,21 @@ class Utils(commands.Cog):
                 await ctx.send(f"I don't have permission to assign roles to {user.mention}.")
             except Exception as e:
                 await ctx.send(f"An error occurred while assigning the role to {user.mention}: {e}")
-	
+    
     @commands.command(aliases=['dr'])
-    async def deleterole(self, ctx, role: discord.Role):
+    async def deleterole(self, ctx, *roles: discord.Role):
         """Delete a role from the server"""
+        if not roles:
+            return await ctx.send("Specify at least one role to delete.")
         if ctx.author.guild_permissions.manage_roles:
-            try:
-                await role.delete()
-                await ctx.send(f"Role `{role.name}` has been successfully deleted.")
-            except discord.Forbidden:
-                await ctx.send("I don't have permission to delete that role.")
-            except discord.HTTPException as e:
-                await ctx.send(f"An error occurred: {e}")
+            for role in roles:
+                try:
+                    await role.delete()
+                    await ctx.send(f"Role `{role.name}` has been successfully deleted.")
+                except discord.Forbidden:
+                    await ctx.send("I don't have permission to delete that role.")
+                except discord.HTTPException as e:
+                    await ctx.send(f"An error occurred: {e}")
         else:
             await ctx.send("You don't have permission to manage roles.")
 
