@@ -154,8 +154,9 @@ class Utils(commands.Cog):
             except Exception as e:
                 await ctx.send(embed=discord.Embed(title=f":o: Unable to delete emoji :o:", description=f"Error: {e}", color=0xFF0000))
 
-    @commands.command(name="emojis", help="List emojis the bot can access")
+    @commands.command(aliases=['e'])
     async def emojis(self, ctx, *emoji_names):
+        """List emojis the bot can access"""
         if emoji_names:
             found = []
             for name in emoji_names:
