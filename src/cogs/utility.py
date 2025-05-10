@@ -63,7 +63,7 @@ class Utils(commands.Cog):
 
     @commands.has_permissions(manage_roles=True)
     @commands.command(aliases=['nr'])
-    async def newrole(self, ctx, *name: str, color: str):
+    async def newrole(self, ctx, *, name: str, color: str):
         """Create a new role with the specified name and color"""
         try:
             color_int = int(color, 16)
@@ -74,7 +74,7 @@ class Utils(commands.Cog):
         await ctx.send(embed=discord.Embed(title=f"New Role: {name}", description=f"**{role.mention}** has been created.", color=color_int))
 
     @commands.has_permissions(manage_roles=True)
-    @commands.command(alias=['gr'])
+    @commands.command(aliases=['gr'])
     async def giverole(self, ctx, role: discord.Role, *users: discord.Member):
         """Assign a role to multiple users"""
         if not users:
@@ -88,6 +88,20 @@ class Utils(commands.Cog):
                 await ctx.send(f"I don't have permission to assign roles to {user.mention}.")
             except Exception as e:
                 await ctx.send(f"An error occurred while assigning the role to {user.mention}: {e}")
+	
+    @commands.command()
+    async def deleterole(self, ctx, role: discord.Role):
+        """Delete a role from the server"""
+        if ctx.author.guild_permissions.manage_roles:
+            try:
+                await role.delete()
+                await ctx.send(f"Role `{role.name}` has been successfully deleted.")
+            except discord.Forbidden:
+                await ctx.send("I don't have permission to delete that role.")
+            except discord.HTTPException as e:
+                await ctx.send(f"An error occurred: {e}")
+        else:
+            await ctx.send("You don't have permission to manage roles.")
 
     @commands.command(aliases=['ne'])
     async def newemoji(self, ctx, url: str, *, name):
