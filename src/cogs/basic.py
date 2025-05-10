@@ -41,7 +41,7 @@ class Basic(commands.Cog):
     async def source(self,ctx,command):
         """get a command's source"""
         cmd = self.bot.get_command(command).callback
-        src = inspect.getsource(cmd).strip()
+        src = inspect.getsource(cmd)
         _file = inspect.getfile(cmd)[8:]
         desc = f"""\
 [**`{_file}`**](<https://github.com/sortalost/slavebot/blob/main/src/{_file}>):
@@ -58,10 +58,10 @@ source on [GitHub](<https://github.dev/sortalost/slavebot/>)
     @commands.command()
     async def info(self,ctx):
         """tech stack of the bot"""
-        dsc = discord.utils.get(bot.emojis, id=844923996738420757)
-        pyt = discord.utils.get(bot.emojis, id=844917083757084713)
-        rwy = discord.utils.get(bot.emojis, id=1370670662359715912)
-        ubn = discord.utils.get(bot.emojis, id=1370682643469045910)
+        dsc = discord.utils.get(self.bot.emojis, id=844923996738420757)
+        pyt = discord.utils.get(self.bot.emojis, id=844917083757084713)
+        rwy = discord.utils.get(self.emojis, id=1370670662359715912)
+        ubn = discord.utils.get(self.emojis, id=1370682643469045910)
         with open("/etc/os-release") as f:
             for line in f:
                 if line.startswith("PRETTY_NAME"):
