@@ -42,13 +42,13 @@ class Basic(commands.Cog):
         """get a command's source"""
         cmd = self.bot.get_command(command).callback
         src = inspect.getsource(cmd)
-        _file = inspect.getfiles(cmd)
+        _file = inspect.getfile(cmd)[8:]
         desc = f"""\
-        From {_file}:
+        From [{_file}](<https://github.com/sortalost/slavebot/blob/main/src/{_file}>):
         ```py
         {src}
         ```
-        
+
         -# source on [GitHub](<https://github.dev/sortalost/slavebot/>)
         """
         return await ctx.send(embed=discord.Embed(description=desc))
