@@ -66,7 +66,7 @@ class Utils(commands.Cog):
 
     @commands.command(aliases=['nr'])
     async def newrole(self, ctx, *, name):
-		"""Create a new role in the server"""
+        """Create a new role in the server"""
         if ctx.author.guild_permissions.manage_roles:
             await ctx.guild.create_role(name=name, color=0x00FF00)
             try:
@@ -98,7 +98,7 @@ class Utils(commands.Cog):
 
     @commands.command(aliases=['ne'])
     async def newemoji(self, ctx, url: str, *, name):
-		"""Create a new emoji in the server"""
+        """Create a new emoji in the server"""
         guild = ctx.guild
         if ctx.author.guild_permissions.manage_emojis:
             async with aiohttp.ClientSession() as ses:
@@ -139,7 +139,7 @@ class Utils(commands.Cog):
 
     @commands.command(aliases=['de'])
     async def delemoji(self, ctx, *, emoji: discord.Emoji):
-		"""Delete an emoji in the server."""
+        """Delete an emoji in the server."""
         guild = ctx.guild
         if ctx.author.guild_permissions.manage_emojis:
             try:
