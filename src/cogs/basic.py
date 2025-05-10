@@ -56,19 +56,21 @@ class Basic(commands.Cog):
     @commands.command()
     async def info(self,ctx):
         """tech stack of the bot"""
+        dsc = discord.utils.get(bot.emojis, id=844923996738420757)
+        pyt = discord.utils.get(bot.emojis, id=844917083757084713)
+        rwy = discord.utils.get(bot.emojis, id=1370670662359715912)
+        ubn = discord.utils.get(bot.emojis, id=1370682643469045910)
         with open("/etc/os-release") as f:
             for line in f:
                 if line.startswith("PRETTY_NAME"):
                     distro = line.strip().split("=")[1].strip('"')
         em = discord.Embed(color=discord.Colour.blurple())
-        em.title("Tech Stack")
-        em.description=f"""\
-        discord.py `{discord.__version__}`
-        python `{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}`
-        {platform.system()} {distro}
-        <:railway:1370670662359715912> runs on Railway
-        `.source` for source code.
-        """
+        em.title = "Tech Stack"
+        em.add_field(name="discord.py", value=f"{dsc} `v{discord.__version__}`", inline=False)
+        em.add_field(name="python", value=f"{py} `{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}`", inline=False)
+        em.add_field(name=platform.system(), value=f"{ubn} `{distro}`", inline=False)
+        em.add_field(name="Runs on", value=f"{rwy} [railway](<https://railway.com>)", inline=False)
+        await ctx.send(embed=em)
 
 
 async def setup(bot):
