@@ -63,8 +63,13 @@ class Utils(commands.Cog):
 
     @commands.has_permissions(manage_roles=True)
     @commands.command(aliases=['nr'])
-    async def newrole(self, ctx, *, name: str, color: str):
+    async def newrole(self, ctx, *args: str):
         """Create a new role with the specified name and color"""
+        if len(args) >= 2:
+            name = " ".join(args[:-1])
+            color = args[-1].replace("#","")
+        else:
+            return await ctx.send(f"Usage: `{ctx.prefix}newrole rolename color`")
         try:
             color_int = int(color, 16)
         except ValueError:
@@ -89,7 +94,7 @@ class Utils(commands.Cog):
             except Exception as e:
                 await ctx.send(f"An error occurred while assigning the role to {user.mention}: {e}")
 	
-    @commands.command()
+    @commands.command(aliases=['dr'])
     async def deleterole(self, ctx, role: discord.Role):
         """Delete a role from the server"""
         if ctx.author.guild_permissions.manage_roles:
