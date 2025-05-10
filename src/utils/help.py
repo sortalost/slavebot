@@ -17,7 +17,10 @@ class Help(commands.HelpCommand):
         for cog in bot.cogs:
             i+=1
             desc+=f"{str(i)}. `{cog}` - {bot.cogs[cog].description}\n"
-        embed1 = discord.Embed(title="Categories", description = desc, color=discord.Color.random())
+        e=discord.Embed(title="Help", color=discord.Color.green())
+        e.add_field(name="Total", value=f"`{len(bot.all_commands)}`", inline=False)
+        e.add_field(name="Categories", value=desc)
+        e.set_thumbnail(url="https://cdn.discordapp.com/emojis/1370654693654663288.webp?size=96&animated=true")
         embeds = [embed1]
         for cog, cmds in mapping.items():
             visible_cmds = [c for c in cmds if not c.hidden and c.name not in self.no]
