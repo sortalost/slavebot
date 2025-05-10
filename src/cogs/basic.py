@@ -25,7 +25,7 @@ class Basic(commands.Cog):
         await ctx.send(content)
 
     @commands.command()
-    async def uptime(self, ctx, r):
+    async def uptime(self, ctx, r="R"):
         seconds = int(time.time() - self.start_time)
         hours, seconds = divmod(seconds, 3600)
         minutes, seconds = divmod(seconds, 60)
