@@ -1,4 +1,5 @@
 import io
+import time
 import discord
 from discord.ext import commands
 from utils.tools import cleanup_code
@@ -7,6 +8,7 @@ from utils.tools import cleanup_code
 class Basic(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.start_time = time.time()
     
     @commands.command()
     async def ping(self, ctx):
@@ -21,6 +23,14 @@ class Basic(commands.Cog):
         except:
             pass
         await ctx.send(content)
+
+    @commands.command()
+    async def uptime(self, ctx, r):
+        seconds = int(time.time() - self.start_time)
+        hours, seconds = divmod(seconds, 3600)
+        minutes, seconds = divmod(seconds, 60)
+        em = discord.Embed(description=f"🕒 **Uptime**: `{hours}h {minutes}m {seconds}s`\n📅 **Since**: <t:{int(self.start_time)}:{r}>")
+        await ctx.send(embed=em)
 
 
 async def setup(bot):
