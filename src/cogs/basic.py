@@ -60,8 +60,8 @@ source on [GitHub](<https://github.dev/sortalost/slavebot/>)
         """tech stack of the bot"""
         dsc = discord.utils.get(self.bot.emojis, id=844923996738420757)
         pyt = discord.utils.get(self.bot.emojis, id=844917083757084713)
-        rwy = discord.utils.get(self.emojis, id=1370670662359715912)
-        ubn = discord.utils.get(self.emojis, id=1370682643469045910)
+        rwy = discord.utils.get(self.bot.emojis, id=1370670662359715912)
+        ubn = discord.utils.get(self.bot.emojis, id=1370682643469045910)
         with open("/etc/os-release") as f:
             for line in f:
                 if line.startswith("PRETTY_NAME"):
