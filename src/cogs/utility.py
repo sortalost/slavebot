@@ -62,20 +62,20 @@ class Utils(commands.Cog):
         await ctx.channel.purge(limit=num)
 
     @commands.has_permissions(manage_roles=True)
-    @commands.command(help="Create a new role with a color")
-    async def newrole(self, ctx, name: str, color: str):
+    @commands.command(aliases=['nr'])
+    async def newrole(self, ctx, *name: str, color: str):
         """Create a new role with the specified name and color"""
         try:
             color_int = int(color, 16)
         except ValueError:
-            return await ctx.send("Invalid color format. Please provide a valid hex color code.")
+            return await ctx.send("Invalid color format. Please provide a valid hex color code, eg: 0000ff for blue")
         
         role = await ctx.guild.create_role(name=name, color=color_int)
         await ctx.send(embed=discord.Embed(title=f"New Role: {name}", description=f"**{role.mention}** has been created.", color=color_int))
 
     @commands.has_permissions(manage_roles=True)
-    @commands.command(alia=['gr'])
-    async def giverole(self, ctx, role: discord.Role, *users: discord.User):
+    @commands.command(alias=['gr'])
+    async def giverole(self, ctx, role: discord.Role, *users: discord.Member):
         """Assign a role to multiple users"""
         if not users:
             return await ctx.send("Please mention at least one user.")
