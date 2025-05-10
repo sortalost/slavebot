@@ -3,6 +3,7 @@ import sys
 import time
 import inspect
 import discord
+import platform
 from discord.ext import commands
 from utils.tools import cleanup_code
 

@@ -27,7 +27,7 @@ class Developer(commands.Cog):
             '_': self._last_result
         }
         env.update(globals())
-        body = self.cleanup_code(body)
+        body = cleanup_code(body)
         stdout = io.StringIO()
         to_compile = f'async def func():\n{textwrap.indent(body, "  ")}'
         
