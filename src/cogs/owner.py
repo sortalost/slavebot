@@ -5,7 +5,8 @@ from contextlib import redirect_stdout
 import discord
 from discord.ext import commands
 
-class Owner(commands.Cog):
+class Developer(commands.Cog):
+    """only for the developer :ver_devUS:"""
     def __init__(self, bot):
         self.bot = bot
         self._last_result = None

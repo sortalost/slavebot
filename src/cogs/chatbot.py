@@ -6,6 +6,7 @@ from utils import database
 
 
 class ChatBot(commands.Cog):
+	"""chat with gemini (not shapes inc.)"""
 	def __init__(self,bot):
 		self.bot=bot
 		self.msgs = {}

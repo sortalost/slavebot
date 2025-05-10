@@ -45,7 +45,7 @@ def is_tag(guild, tag):
 
 
 class Tagging(commands.Cog):
-    """Tag stuff"""
+    """Setup tags for the server"""
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
