@@ -142,13 +142,17 @@ class Utils(commands.Cog):
 
     @commands.has_permissions(manage_emojis=True)
     @commands.command(aliases=["de"])
-    async def delemoji(self, ctx, *, emoji: discord.Emoji):
+    async def delemoji(self, ctx, *emojis: discord.Emoji):
         """Delete an emoji"""
-        try:
-            await emoji.delete()
-            await ctx.send("Emoji successfully deleted!")
-        except Exception as e:
-            await ctx.send(embed=discord.Embed(title=f":o: Unable to delete emoji :o:", description=f"Error: {e}", color=0xFF0000))
+        if not emojis:
+            return await ctx.send("specify at least one emoji to delete.")
+        
+        for emoji in emojis:
+            try:
+                await emoji.delete()
+                await ctx.send(f"Emoji `{emoji.name}` deleted!")
+            except Exception as e:
+                await ctx.send(embed=discord.Embed(title=f":o: Unable to delete emoji :o:", description=f"Error: {e}", color=0xFF0000))
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Utils(bot))
