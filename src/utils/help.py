@@ -4,14 +4,21 @@ import Paginator
 
 
 class Help(commands.HelpCommand):
-    def __init__(self, no=[]):
+    def __init__(self, no=[], bot):
         super().__init__()
+        self.bot = bot
         self.no = no
 
     async def send_bot_help(self, mapping):
         ctx = self.context
         prefix = ctx.clean_prefix
-        embeds = []
+        desc = ""
+        i = 0
+        for cog in self.bot.cogs:
+            i+=1
+            desc+=f"{str(i)}. `{cog}` - {self.bot.cogs[cog].description}\n"
+        embed1 = discord.Embed(title="Categories", description = desc, color=discord.Color.random())
+        embeds = [embed1]
         for cog, cmds in mapping.items():
             visible_cmds = [c for c in cmds if not c.hidden and c.name not in self.no]
             if not visible_cmds:
