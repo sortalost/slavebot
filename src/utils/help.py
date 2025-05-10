@@ -4,10 +4,10 @@ import Paginator
 
 
 class Help(commands.HelpCommand):
-    def __init__(self, no=[], bot):
+    def __init__(self, no=[]):
         super().__init__()
-        self.bot = bot
         self.no = no
+        self.bot = self.context.bot
 
     async def send_bot_help(self, mapping):
         ctx = self.context
