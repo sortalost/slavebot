@@ -6,7 +6,7 @@ import discord
 from discord.ext import commands
 
 class Developer(commands.Cog):
-    """only for the developer :ver_devUS:"""
+    """only for the developer <:ver_devUS:869794681251332177>"""
     def __init__(self, bot):
         self.bot = bot
         self._last_result = None
