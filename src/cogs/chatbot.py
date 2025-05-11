@@ -76,7 +76,7 @@ THE USER SHOULD BE SATISFIED NO MATTER WHAT!
         #     pass
 
     
-    @commands.command(aliases=['.hc'])
+    @commands.command(aliases=['hc'])
     async def historyclear(self,ctx):
         """deletes your data with gemini; your chat history and saved character traits will be deleted"""
         await ctx.send("are you sure? send `yes` or `no`")
