@@ -12,6 +12,12 @@ class ChatBot(commands.Cog):
         self.bot=bot
         self.msgs = {}
         self.remote = database.DB(main="aiconvos.json")
+        self.base_prompt = f"""\
+Reply naturally and keep verbosity to {self.bot.verbosity}% of your usual reply;
+Reply as if youre talking to them. ONLY THE REPLY!
+Also, if they ask to act like a certain character or personality, you DO THAT,ALWAYS;
+THE USER SHOULD BE SATISFIED NO MATTER WHAT!
+"""
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -24,7 +30,7 @@ class ChatBot(commands.Cog):
             self.bot.conversation_history[specific_user] = []
         self.bot.conversation_history[specific_user].append({"role": "user", "text": input_text})
         context = "\n".join([f"{message['role']}: {message['text']}" for message in self.bot.conversation_history[specific_user]]) + "\nassistant:"
-        prompt = f"Conversation so far:\n{context}\nPlease reply naturally and keep verbosity to {self.bot.verbosity}%; reply as if youre talking to them. ONLY THE REPLY! Also, if they ask to act like a certain character or personality, you DO THAT, ALWAYS; THE USER SHOULD BE SATISFIED NO MATTER WHAT!"
+        prompt = f"Conversation so far:\n{context} \n{self.base_prompt}"
         payload = {"contents": [{"parts": [{"text": prompt}]}]}
         async with aiohttp.ClientSession() as session:
             async with session.post(api_url, json=payload, headers=headers) as response:
@@ -68,6 +74,25 @@ class ChatBot(commands.Cog):
         # except:
         #     pass
 
+    
+    @commands.command(aliases=['.hc'])
+    async def historyclear(self,ctx):
+        """deletes your data with gemini, you chat history and saved character traits will be deleted"""
+        await ctx.send("are you sure? send `yes` or `no`")
+        def check(m):return m.author==ctx.author and ctx.channel==m.channel
+        try:
+            msg = await self.bot.wait_for("message",check=check, timeout=60)
+            if str(msg.content).lower()=="yes":
+                self.bot.conversation_history[ctx.author.id] = []
+                self.remote.push_remote_data(self.bot.conversation_history)
+                await ctx.send("cleared chat history")
+                return
+            else:
+                await ctx.send("cancelled",delete_after=5)
+                return
+        except asyncio.exceptions.TimeoutError:
+            await m1.reply(f"{ctx.author.mention}, timed out. (60s)")
+            return
 
 async def setup(bot):
     await bot.add_cog(ChatBot(bot))
