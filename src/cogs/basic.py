@@ -41,12 +41,12 @@ class Basic(commands.Cog):
     async def source(self,ctx,command):
         """get a command's source"""
         cmd = self.bot.get_command(command).callback
-        src = inspect.getsource(cmd)
+        src, line = inspect.getsourcelines(cmd)
         _file = inspect.getfile(cmd)[8:]
         desc = f"""\
-[**`{_file}`**](<https://github.com/sortalost/slavebot/blob/main/src/{_file}>):
+[**`{_file}`**](<https://github.com/sortalost/slavebot/blob/main/src/{_file}#L{line}>):
 ```py
-{src}
+{"".join(src)}
 ```
 
 source on [GitHub](<https://github.dev/sortalost/slavebot/>)
