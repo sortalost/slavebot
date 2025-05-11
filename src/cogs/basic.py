@@ -38,7 +38,7 @@ class Basic(commands.Cog):
         await ctx.send(embed=em)
 
     @commands.command(aliases=['src'])
-    async def source(self,ctx,command):
+    async def source(self,ctx,*,command):
         """get a command's source"""
         cmd = self.bot.get_command(command).callback
         src, line = inspect.getsourcelines(cmd)
