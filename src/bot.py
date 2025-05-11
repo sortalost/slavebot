@@ -41,7 +41,7 @@ async def on_ready():
     fails: {', '.join(_vars['y'])}
     reasons:{' | '.join(_vars['r'])}
     """
-    await bot.get_channel(LOG).send(f"<@{bot.owner_id}>".,embed=em)
+    await bot.get_channel(LOG).send(f"<@{bot.owner_id}>",embed=em)
 
 
 @bot.event
