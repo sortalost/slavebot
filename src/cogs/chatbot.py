@@ -60,6 +60,7 @@ THE USER SHOULD BE SATISFIED NO MATTER WHAT!
                 await msg.reply("[-] user quits")
                 run=False
                 break
+            await ctx.typing()
             reply = await self.get(str(msg.content), ctx.author.id)
             bmsg = await msg.reply(reply)
             self.msgs.get(ctx.guild.id).append(msg)
@@ -77,12 +78,13 @@ THE USER SHOULD BE SATISFIED NO MATTER WHAT!
     
     @commands.command(aliases=['.hc'])
     async def historyclear(self,ctx):
-        """deletes your data with gemini, you chat history and saved character traits will be deleted"""
+        """deletes your data with gemini; your chat history and saved character traits will be deleted"""
         await ctx.send("are you sure? send `yes` or `no`")
         def check(m):return m.author==ctx.author and ctx.channel==m.channel
         try:
             msg = await self.bot.wait_for("message",check=check, timeout=60)
             if str(msg.content).lower()=="yes":
+                await ctx.typing()
                 self.bot.conversation_history[ctx.author.id] = []
                 self.remote.push_remote_data(self.bot.conversation_history)
                 await ctx.send("cleared chat history")
