@@ -8,6 +8,11 @@ import Paginator
 import re
 import zlib
 
+
+class RtfmBuildError:
+    pass
+
+
 class Utils(commands.Cog):
     """Utility commands"""
     
@@ -22,8 +27,6 @@ class Utils(commands.Cog):
         }
         self.cache = {}
 
-    class RtfmBuildError:
-        pass
 
     async def build(self, target) -> None:
         url = self.targets[target]
