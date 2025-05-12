@@ -210,11 +210,11 @@ class Utils(commands.Cog):
         Documentiation refercence for discord.py and python
         """
         docs = docs.lower()
-        target = None
-        for aliases, target_name in self.rtfmaliases.items():
-            if docs in aliases:
-                target = target_name
-        if not target:
+        try:
+            for aliases, target_name in self.rtfmaliases.items():
+                if docs in aliases:
+                    target = target_name
+        except ValueError:
             lis = "\n".join(
                 [f"{index}. {value.capitalize()}" for index, value in list(self.targets.keys())]
             )
@@ -236,9 +236,7 @@ class Utils(commands.Cog):
             cache = self.cache.get(target)
         results = rtfmutils.finder(term, list(cache.items()), key=lambda x: x[0], lazy=False)[:10]
         if not results:
-            return await ctx.reply(
-                f"No results found for **{term}** in **{docs}** Docs"
-            )
+            return await ctx.reply(f"No results found for **{term}** in **{docs}** Docs")
         await ctx.reply(
             embed=discord.Embed(
                 title=f"Matches related to **{term}** in **{docs}** Docs",
