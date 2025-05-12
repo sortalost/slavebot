@@ -5,6 +5,8 @@ from discord.utils import get
 import sys
 from io import BytesIO
 import Paginator
+import re
+import zlib
 
 class Utils(commands.Cog):
     """Utility commands"""
@@ -13,6 +15,23 @@ class Utils(commands.Cog):
         self.bot = bot
         self.logchannel = bot.get_channel(877473404117209191)
         self.lastmsg = {}
+        self.targets = {"python": "https://docs.python.org/3", "discord": "https://discordpy.readthedocs.io/en/latest/"}
+        self.rtfmaliases = {
+            ("py", "p", "python"): "python",
+            ("discord","d","dpy"): "discord",
+        }
+        self.cache = {}
+
+    class RtfmBuildError:
+        pass
+
+    async def build(self, target) -> None:
+        url = self.targets[target]
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url+"/objects.inv") as response:
+                if response.status != 200:
+                    raise RtfmBuildError
+        self.cache[target] = rtfmutils.SphinxObjectFileReader(await req.read()).parse_object_inv(url)
 
     def gen_snipe(self, ctx, guild):
         eb = []
@@ -184,6 +203,49 @@ class Utils(commands.Cog):
                 embeds.append(embed)
             await Paginator.Simple().start(ctx, pages=embeds)
 
+
+    @commands.command(aliases=['docs'])
+    async def rtfm(self, ctx, docs: str, *, term: str = None):
+        """
+        Documentiation refercence for discord.py and python
+        """
+        docs = docs.lower()
+        target = None
+        for aliases, target_name in self.rtfmaliases.items():
+            if docs in aliases:
+                target = target_name
+        if not target:
+            lis = "\n".join(
+                [f"{index}. {value.capitalize()}" for index, value in list(self.targets.keys())]
+            )
+            return await ctx.reply(
+                embed=ctx.error(
+                    title="Invalid",
+                    description=f"**{docs}** isnt supprted, try\n{lis}",
+                )
+            )
+        if not term:
+            return await ctx.reply(self.targets[target])
+        cache = self.cache.get(target)
+        if not cache:
+            await ctx.typing()
+            try:
+                await self.build(target)
+            except RtfmBuildError:
+                return await ctx.send("An error occurred.")
+            cache = self.cache.get(target)
+        results = rtfmutils.finder(term, list(cache.items()), key=lambda x: x[0], lazy=False)[:10]
+        if not results:
+            return await ctx.reply(
+                f"No results found for **{term}** in **{docs}** Docs"
+            )
+        await ctx.reply(
+            embed=discord.Embed(
+                title=f"Matches related to **{term}** in **{docs}** Docs",
+                description="\n".join([f"[`{key}`]({url})" for key, url in results]),
+                color=discord.Color.dark_theme(),
+                timestamp=ctx.message.created_at).set_footer(text=ctx.author.name,icon_url=ctx.author.avatar)
+            )
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Utils(bot))
