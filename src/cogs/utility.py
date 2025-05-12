@@ -34,7 +34,7 @@ class Utils(commands.Cog):
             async with session.post(url+"/objects.inv") as response:
                 if response.status != 200:
                     raise TypeError
-        self.cache[target] = rtfmutils.SphinxObjectFileReader(await req.read()).parse_object_inv(url)
+                self.cache[target] = rtfmutils.SphinxObjectFileReader(await response.read()).parse_object_inv(url)
 
     def gen_snipe(self, ctx, guild):
         eb = []
