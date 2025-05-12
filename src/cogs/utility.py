@@ -219,6 +219,8 @@ class Utils(commands.Cog):
             for aliases, target_name in self.rtfmaliases.items():
                 if docs in aliases:
                     target = target_name
+            if not term:
+                return await ctx.reply(self.targets[target])
         except:
             lis = "\n".join(
                 [f"{index}. {value.capitalize()}" for index, value in list(self.targets.keys())]
@@ -229,8 +231,6 @@ class Utils(commands.Cog):
                     description=f"**{docs}** isnt supprted, try\n{lis}",
                 )
             )
-        if not term:
-            return await ctx.reply(self.targets[target])
         cache = self.cache.get(target)
         if not cache:
             await ctx.typing()
