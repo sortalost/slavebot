@@ -32,8 +32,6 @@ class Utils(commands.Cog):
         url = self.targets[target]
         async with aiohttp.ClientSession() as session:
             async with session.post(url+"/objects.inv") as response:
-                if response.status != 200:
-                    raise TypeError
                 self.cache[target] = rtfmutils.SphinxObjectFileReader(await response.read()).parse_object_inv(url)
 
     def gen_snipe(self, ctx, guild):
