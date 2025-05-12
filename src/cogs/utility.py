@@ -219,7 +219,7 @@ class Utils(commands.Cog):
             for aliases, target_name in self.rtfmaliases.items():
                 if docs in aliases:
                     target = target_name
-        except ValueError:
+        except:
             lis = "\n".join(
                 [f"{index}. {value.capitalize()}" for index, value in list(self.targets.keys())]
             )
