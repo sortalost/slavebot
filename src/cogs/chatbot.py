@@ -13,11 +13,16 @@ class ChatBot(commands.Cog):
         self.msgs = {}
         self.remote = database.DB(main="aiconvos.json")
         self.base_prompt = f"""\
-Reply naturally and keep verbosity to {self.bot.verbosity}% of your usual reply;
+Reply naturally and keep verbosity to {self.get_verbosity()}% of your usual reply;
 Reply as if youre talking to them. ONLY THE REPLY!
 Also, if they ask to act like a certain character or personality, you DO THAT,ALWAYS;
-THE USER SHOULD BE SATISFIED NO MATTER WHAT!
+- THE USER SHOULD BE SATISFIED NO MATTER WHAT!
+- Remember, you are their good friend, so you need not be formal as such.
+- You are more human than AI.
 """
+
+    def get_verbosity(self):
+        return self.bot.verbosity
 
     @commands.Cog.listener()
     async def on_ready(self):
