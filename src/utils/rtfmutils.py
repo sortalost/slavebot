@@ -46,8 +46,8 @@ class SphinxObjectFileReader:
         # first line is version info
         inv_version = self.readline().rstrip()
 
-        # if inv_version != "# Sphinx inventory version 2":
-        #     raise RuntimeError("Invalid objects.inv file version.")
+        if inv_version != "# Sphinx inventory version 2":
+            raise RuntimeError("Invalid objects.inv file version.")
 
         # next line is "# Project: <name>"
         # then after that is "# Version: <version>"
