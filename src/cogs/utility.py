@@ -9,7 +9,7 @@ import re
 import zlib
 
 
-class RtfmBuildError:
+class RtfmBuildError(Exception):
     pass
 
 
@@ -213,6 +213,7 @@ class Utils(commands.Cog):
         Documentiation refercence for discord.py and python
         """
         docs = docs.lower()
+        target=None
         try:
             for aliases, target_name in self.rtfmaliases.items():
                 if docs in aliases:
