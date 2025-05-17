@@ -1,1 +1,3 @@
-forgot ctx and typed only guild lol
+tags the updated embed
+notifies the user that it is updated
+deletes the command by the user
