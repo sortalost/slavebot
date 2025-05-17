@@ -1,1 +1,1 @@
-Added prompt.txt and transferred prompt from cogs/chatbot.py to it
+Added new LOG channel 1373342896501297273

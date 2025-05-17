@@ -8,7 +8,7 @@ from utils.help import Help
 
 
 TOKEN = os.getenv("TOKEN")
-LOG = 877473404117209191
+LOG = 1373342896501297273
 prefix = "."
 _vars = {
     'x':[],
