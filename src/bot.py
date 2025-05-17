@@ -34,7 +34,7 @@ bot.conversation_history = {}
 async def on_ready():
     print("up and running")
     timestamp = int(time.time())
-    with open("src/files/update.txt") as f:
+    with open("src/files/update.txt","r") as f:
         update = f.read()
     em = discord.Embed(title=f"Running", color=discord.Color.green())
     em.add_field(name="TIME", value=f"<t:{timestamp}> - <t:{timestamp}:R>")

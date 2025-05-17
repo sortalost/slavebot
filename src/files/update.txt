@@ -1,2 +1,1 @@
-Tells update.txt when starts running.
-.update command too
+Added prompt.txt and transferred prompt from cogs/chatbot.py to it
