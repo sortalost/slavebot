@@ -8,6 +8,7 @@ class Server(commands.Cog):
     """Stuff related to the [Server](https://discord.gg/yVw38mjpFu)"""
     def __init__(self, bot):
         self.bot = bot
+        self.rules = 1373384320751894535
     
     @commands.is_owner()
     @commands.command(aliases=['su'])
@@ -30,6 +31,14 @@ class Server(commands.Cog):
         msg = await ctx.fetch_message(mid)
         await msg.edit(embed=em)
         await msg.reply("updated",delete_after=10)
+
+    
+    @commands.is_owner()
+    @commands.command(aliases=['ru'])
+    async def rulesupdate(self,ctx,*, rule:str):
+        ch = await bot.get_channel(self.rulesch)
+        await ch.send(rule)
+        await ctx.reply(f"Check {ch.mention}")
 
 
 async def setup(bot):
