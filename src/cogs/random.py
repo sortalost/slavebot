@@ -16,7 +16,7 @@ class Random(commands.Cog):
                 return await ctx.send("atleast one")
         except:
             return await ctx.send(f"must be a number. Eg: `.cs 4` sends four videos. Maximum limit is {self.max_vid}. Change using `.maxcsgo number`")
-        allurls = []
+        # allurls = []
         if int(num)>self.max_vid:
             return await ctx.send(f"`num` cannot be > {self.max_vid}. Change using `.maxcsgo number`")
         await ctx.typing()
@@ -29,15 +29,21 @@ class Random(commands.Cog):
                     resp = await response.json()
                     url = resp['video']
                     name = url.split("/")[-1]
-                    allurls.append(f"`{i}`.[`{name}`]({url})")
-        await ctx.send("\n".join(allurls))
+                    await ctx.send(f"`{i}`.[`{name}`]({url})")
+        # await ctx.send("\n".join(allurls))
 
 
     @commands.has_permissions(manage_messages=True)
     @commands.command()
     async def maxcsgo(self,ctx,num:int=0):
+        try:
+            num=int(num)
+        except:
+            await ctx.send(f"must be number, not {type(num)}")
         if num==0:
             return await ctx.send(f"Current CSGO videos threshold: `{self.max_vid}`")
+        if num>30:
+            return await ctx.send(f"`{num}` is too much, no, max threshold only `20`")
         self.max_vid=num
         await ctx.send(f"Current CSGO videos threshold: `{self.max_vid}`")
 
