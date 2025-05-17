@@ -17,8 +17,8 @@ class Server(commands.Cog):
         bots = len([member for member in guild.members if member.bot])
         roles = []
         for r in ctx.guild.roles:
-        if not r.is_bot_managed() and (not r.is_default()):
-            roles.append(r.mention)
+            if not r.is_bot_managed() and (not r.is_default()):
+                roles.append(r.mention)
         em.description = f"""\
         `{members}` members.
         `{bots}` bots.
