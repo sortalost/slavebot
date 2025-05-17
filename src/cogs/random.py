@@ -16,6 +16,7 @@ class Random(commands.Cog):
             return await ctx.send("`num` cannot be > 5")
         await ctx.typing()
         for i in range(num):
+            i+=1
             async with aiohttp.ClientSession() as session:
                 async with session.get("https://csgoanime.vercel.app/new") as response:
                     if response.status != 200:
