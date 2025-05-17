@@ -23,7 +23,7 @@ class Random(commands.Cog):
                     resp = await response.json()
                     url = resp['video']
                     name = url.split("/")[-1]
-                    allurls.append(f"`{i}`.[`{name}`]({url['video']})")
+                    allurls.append(f"`{i}`.[`{name}`]({url})")
         await ctx.send("\n".join(allurls))
 
 
