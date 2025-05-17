@@ -11,6 +11,11 @@ class Random(commands.Cog):
     @commands.command(aliases=['cs'])
     async def csgo(self, ctx, num:int = 1):
         """get `n` videos from CSGOANI.ME"""
+        try:
+            if int(num)==0:
+                return await ctx.send("atleast one")
+        except:
+            return await ctx.send(f"must be a number. Eg: `.cs 4` sends four videos. Maximum limit is {self.max_vid}. Change using `.maxcsgo number`")
         allurls = []
         if int(num)>self.max_vid:
             return await ctx.send("`num` cannot be > 5")
