@@ -25,9 +25,11 @@ class Server(commands.Cog):
         {len(roles)} roles:
         {' '.join(roles)}
         """
+        await ctx.message.delete()
         mid = ctx.message.reference.message_id
         msg = await ctx.fetch_message(mid)
         await msg.edit(embed=em)
+        await msg.reply("updated",delete_after=10)
 
 
 async def setup(bot):
