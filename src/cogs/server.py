@@ -14,7 +14,7 @@ class Server(commands.Cog):
     async def serverupdate(self,ctx):
         em = discord.Embed(title=f"Last update: <t:{int(time.time())}:R>",color=ctx.author.color)
         members = ctx.guild.member_count
-        bots = len([member for member in guild.members if member.bot])
+        bots = len([member for member in ctx.guild.members if member.bot])
         roles = []
         for r in ctx.guild.roles:
             if not r.is_bot_managed() and (not r.is_default()):
