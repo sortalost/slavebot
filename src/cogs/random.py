@@ -13,11 +13,12 @@ class Random(commands.Cog):
         allurls = []
         if int(num)>5:
             return await ctx.send("`num` cannot be > 5")
+        await ctx.typing()
         for i in range(num):
             async with aiohttp.ClientSession() as session:
                 async with session.post("https://csgoanime.vercel.app/new") as response:
                     if response.status != 200:
-                        return await ctx.send("something went wrong...", delete_after=10)
+                        return await ctx.send(response.status, delete_after=10)
                     url = await response.json()
                     allurls.append(url)
         await ctx.send("\n".join(allurls))
