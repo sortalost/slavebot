@@ -29,7 +29,7 @@ class Random(commands.Cog):
 
     @commands.has_permissions(manage_messages=True)
     @commands.command()
-    def maxcsgo(self,ctx,num:int=0):
+    async def maxcsgo(self,ctx,num:int=0):
         if num==0:
             return await ctx.send(f"Current CSGO videos threshold: `{self.max_vid}`")
         self.max_vid=num
