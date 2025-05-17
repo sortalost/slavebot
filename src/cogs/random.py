@@ -17,7 +17,6 @@ class Random(commands.Cog):
             async with aiohttp.ClientSession() as session:
                 async with session.post("https://csgoanime.vercel.app/new") as response:
                     if response.status != 200:
-                        i=1
                         return await ctx.send("something went wrong...", delete_after=10)
                     url = await response.json()
                     allurls.append(url)
