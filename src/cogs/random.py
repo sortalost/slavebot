@@ -19,7 +19,7 @@ class Random(commands.Cog):
                 async with session.get("https://csgoanime.vercel.app/new") as response:
                     if response.status != 200:
                         return await ctx.send(response.status, delete_after=10)
-                    url = await response.json()
+                    url = await response.json()['video']
                     allurls.append(url)
         await ctx.send("\n".join(allurls))
   
