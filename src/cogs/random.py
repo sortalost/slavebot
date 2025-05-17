@@ -39,7 +39,7 @@ class Random(commands.Cog):
         try:
             num=int(num)
         except:
-            await ctx.send(f"must be number, not {type(num)}")
+            return await ctx.send(f"must be number, not {type(num)}")
         if num==0:
             return await ctx.send(f"Current CSGO videos threshold: `{self.max_vid}`")
         if num>30:
