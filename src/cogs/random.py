@@ -16,7 +16,7 @@ class Random(commands.Cog):
         await ctx.typing()
         for i in range(num):
             async with aiohttp.ClientSession() as session:
-                async with session.post("https://csgoanime.vercel.app/new") as response:
+                async with session.get("https://csgoanime.vercel.app/new") as response:
                     if response.status != 200:
                         return await ctx.send(response.status, delete_after=10)
                     url = await response.json()
