@@ -73,7 +73,13 @@ source on [GitHub](<https://github.dev/sortalost/slavebot/>)
         em.add_field(name=platform.system(), value=f"{ubn} `{distro}`", inline=False)
         em.add_field(name="Runs on", value=f"{rwy} [railway](<https://railway.com>)", inline=False)
         await ctx.send(embed=em)
+    
 
+    @commands.command()
+    async def update(self,ctx):
+        with open("src/files/update.txt") as f:
+            update = f.read()
+        await ctx.send(f"```{update}```")
 
 async def setup(bot):
     await bot.add_cog(Basic(bot))

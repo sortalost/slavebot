@@ -1,0 +1,2 @@
+Tells update.txt when starts running.
+.update command too

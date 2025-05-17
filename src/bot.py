@@ -34,12 +34,16 @@ bot.conversation_history = {}
 async def on_ready():
     print("up and running")
     timestamp = int(time.time())
-    em = discord.Embed(title=f"running", color=discord.Color.green())
-    em.add_field(name="time", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
+    with open("src/files/update.txt") as f:
+        update = f.read()
+    em = discord.Embed(title=f"Running", color=discord.Color.green())
+    em.add_field(name="TIME", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
     em.description = f"""\
-    success:{', '.join(_vars['x'])}
-    fails: {', '.join(_vars['y'])}
-    reasons:{' | '.join(_vars['r'])}
+    ```{update}```
+    **Cogs:**
+    **- Loaded:** {', '.join(_vars['x'])}
+    **- Errors:** {', '.join(_vars['y'])}
+    **- Reasons:** {' | '.join(_vars['r'])}
     """
     await bot.get_channel(LOG).send(f"<@{bot.owner_id}>",embed=em)
 
