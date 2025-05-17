@@ -18,7 +18,7 @@ class Random(commands.Cog):
             return await ctx.send(f"must be a number. Eg: `.cs 4` sends four videos. Maximum limit is {self.max_vid}. Change using `.maxcsgo number`")
         allurls = []
         if int(num)>self.max_vid:
-            return await ctx.send("`num` cannot be > 5")
+            return await ctx.send(f"`num` cannot be > {self.max_vid}. Change using `.maxcsgo number`")
         await ctx.typing()
         for i in range(num):
             i+=1
