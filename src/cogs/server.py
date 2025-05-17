@@ -36,7 +36,7 @@ class Server(commands.Cog):
     @commands.is_owner()
     @commands.command(aliases=['ru'])
     async def rulesupdate(self,ctx,*, rule:str):
-        ch = await bot.get_channel(self.rulesch)
+        ch = await self.bot.get_channel(self.rulesch)
         await ch.send(rule)
         await ctx.reply(f"Check {ch.mention}")
 
