@@ -8,7 +8,7 @@ class Server(commands.Cog):
     """Stuff related to the [Server](https://discord.gg/yVw38mjpFu)"""
     def __init__(self, bot):
         self.bot = bot
-        self.rules = 1373384320751894535
+        self.rulesch = 1373384320751894535
     
     @commands.is_owner()
     @commands.command(aliases=['su'])
