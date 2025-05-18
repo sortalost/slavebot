@@ -47,6 +47,7 @@ class Server(commands.Cog):
         if member.bot:
             return
         member.guild.get_role(self.roles['human'])
+        await self.bot.get_channel(1373384320751894535).send(member.mention)
         await member.add_roles(role)
 
 async def setup(bot):
