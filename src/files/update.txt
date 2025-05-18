@@ -1,2 +1,1 @@
-+ add error handling
-+ fixing .listwakewords error handling of KeyError
+oops, there was no `ctx` in on_message
