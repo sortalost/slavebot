@@ -46,6 +46,8 @@ class Server(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self,msg):
+        if msg.author.bot:
+            return
         guildwords = self.remote.get_remote_data()[msg.guild.id]
         ctx = await self.bot.get_context(msg)
         if msg.content.lower() in list(guildwords):

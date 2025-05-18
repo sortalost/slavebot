@@ -1,1 +1,1 @@
-oops, there was no `ctx` in on_message
+no wakewords for bots
