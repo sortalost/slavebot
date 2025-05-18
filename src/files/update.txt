@@ -1,1 +1,2 @@
-added rules update command
+on_member_join, assign him @human role
+fixed ruleupdate

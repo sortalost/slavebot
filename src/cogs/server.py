@@ -9,6 +9,7 @@ class Server(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.rulesch = 1373384320751894535
+        self.roles = {'human':1373325900040634531}
     
     @commands.is_owner()
     @commands.command(aliases=['su'])
@@ -36,10 +37,17 @@ class Server(commands.Cog):
     @commands.is_owner()
     @commands.command(aliases=['ru'])
     async def rulesupdate(self,ctx,*, rule:str):
-        ch = await self.bot.get_channel(self.rulesch)
+        ch = self.bot.get_channel(self.rulesch)
         await ch.send(rule)
         await ctx.reply(f"Check {ch.mention}")
 
+    
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        if member.bot:
+            return
+        member.guild.get_role(self.roles['human'])
+        await member.add_roles(role)
 
 async def setup(bot):
     await bot.add_cog(Server(bot))
