@@ -15,9 +15,6 @@ class ChatBot(commands.Cog):
         with open("src/files/prompt.txt","r") as f:
             self.base_prompt = f.read()
 
-    def get_verbosity(self):
-        return self.bot.verbosity
-
     @commands.Cog.listener()
     async def on_ready(self):
         self.bot.conversation_history = self.remote.get_remote_data()

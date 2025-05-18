@@ -27,7 +27,6 @@ bot = commands.Bot(
     strip_after_prefix=True
 )
 
-bot.verbosity = 30
 bot.conversation_history = {}
 
 @bot.event
@@ -39,7 +38,7 @@ async def on_ready():
     em = discord.Embed(title=f"Running", color=discord.Color.green())
     em.add_field(name="TIME", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
     em.description = f"""\
-    ```{update}```
+    ```diff\n{update}\n```
     **Cogs:**
     **- Loaded:** {', '.join(_vars['x'])}
     **- Errors:** {', '.join(_vars['y'])}

@@ -54,9 +54,18 @@ class Server(commands.Cog):
     @commands.command(aliases=['ww'])
     async def wakeword(self,ctx,word:str,*,reply:str):
         words = self.remote.get_remote_data()
-        words[ctx.guild.id][word] = reply
+        try:
+            words[ctx.guild.id][word] = reply
+        except KeyError:
+            words.update({ctx.guild.id:{word:reply}})
         self.remote.push_remote_data(words)
-        await ctx.send(f"Added `{word}` amongst:\n{', '.join(list(words))}")
+        await ctx.send(f"Added `{word}`. Total `{len(list(words[ctx.guild.id]))}`.")
+
+
+    @commands.command(aliases=['lw'])
+    async def listwakewords(self,ctx):
+        guildwords = self.remote.get_remote_data()[ctx.guild.id]
+        await ctx.send(", ".join(guildwords))
 
 
 async def setup(bot):
