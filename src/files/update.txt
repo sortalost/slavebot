@@ -1,6 +1,2 @@
-+ added .listwakewords
-+ added this feature of green/red color using `diff`
-Tried fixing KeyError fo .wakeword
-- .verbosity because its irrelevant
-- removed `bot.verbosity` too
-- removed Pessimist characteristic from the prompt
++ add error handling
++ fixing .listwakewords error handling of KeyError

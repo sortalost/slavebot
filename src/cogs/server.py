@@ -64,7 +64,14 @@ class Server(commands.Cog):
 
     @commands.command(aliases=['lw'])
     async def listwakewords(self,ctx):
-        guildwords = self.remote.get_remote_data()[ctx.guild.id]
+        words = self.remote.get_remote_data()
+        try:
+            guildwords = words[ctx.guild.id]
+        except KeyError:
+            words.update({ctx.guild.id:{}})
+            return await ctx.send("initialized")
+        if list(guildwords)==[]:
+            return await ctx.send("None. Setup using `.wakeword [word] [reply to it]`")
         await ctx.send(", ".join(guildwords))
 
 

@@ -61,6 +61,13 @@ async def on_command_error(ctx, error):
     await ctx.send(embed=em)
 
 
+@bot.event
+async def on_error(event, *args, **kwargs):
+    channel = bot.get_channel(1373342896501297273)
+    if channel:
+        error = traceback.format_exc()
+        await channel.send(embed=discord.Embed(title=f"error in `{event}`",color=discord.Color.red(),description=f"```\n{error}\n```"))
+
 
 async def main():
     async with bot:
