@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from bot.bot import bot # T_T
+from src.bot.bot import bot # T_T
 import time
 
 app = Flask(__name__)
