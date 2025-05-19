@@ -71,7 +71,7 @@ async def on_error(event, *args, **kwargs):
 
 async def run_async():
     async with bot:
-        for filename in os.listdir(f"./src/cogs"):
+        for filename in os.listdir(f"src/bot/cogs"):
             if filename.endswith(".py"):
                 try:
                     await bot.load_extension(f"cogs.{filename[:-3]}")
