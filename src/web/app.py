@@ -1,9 +1,10 @@
 from flask import Flask, render_template
 from src.bot.bot import bot # T_T
+from src.bot.utils import database
 import time
 
 app = Flask(__name__)
-
+db = database.DB(main="aiconvos.json")
 start_time = time.time()
 
 @app.route("/")
@@ -25,3 +26,19 @@ def commands():
     ]
     return render_template("commands.html", commands=commands_list)
 
+
+
+@app.route("/ai")
+def ai_root():
+    data = db.get_remote_data()
+    users = list(data)
+    return render_template("airoot.html", users=users)
+
+
+@app.route("/ai/<user>")
+def ai_user(user):
+    try:
+        userdata = db.get_remote_data()[user]
+    except KeyError:
+        return "No data, have a conversation with the bot first"
+    return render_template("aiuser.html", conversation=userdata, uid=user)

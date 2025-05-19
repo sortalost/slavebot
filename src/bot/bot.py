@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 import datetime
 import time
+import traceback
 from src.bot.utils.help import Help
 
 

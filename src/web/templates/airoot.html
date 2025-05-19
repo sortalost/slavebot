@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} AI Root {% endblock %}
+
+{% block body %}
+  <h1>all users hwo have used ai</h1>
+  <ol>
+    {% for uid in data %}
+      <li><a href="/ai/{{ uid }}"><strong>{{ uid }}</strong></a></li>
+    {% endfor %}
+  </ol>
+  {% block footer %}
+  <a href="/">Back to homepage</a>
+  {% endblock %}
+{% endblock %}

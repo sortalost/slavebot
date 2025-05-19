@@ -3,9 +3,12 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
-{% block body %}
-
-{% endblock %}
+<body class="container">
+    {% block body %}
+    {% endblock %}
+    <footer>
+        {% block footer %}
+        {% endblock %}
+    </footer>
 </body>
 </html>

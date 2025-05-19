@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} User {{ user }} {% endblock %}
+
+{% block body %}
+  <h1>User {{user}}'s conversation:</h1>
+  <ul>
+    {% for message in conversation %}
+      <li>
+        {% if message.role == 'user' %}
+          <strong class="user">User:</strong> {{ message.text }}
+        {% elif message.role == 'assistant' %}
+          <strong class="bot">Bot:</strong> {{ message.text }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  {% block footer %}
+  <a href="/">Back to homepage</a>
+  {% endblock %}
+{% endblock %}
