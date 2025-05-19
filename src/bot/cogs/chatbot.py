@@ -12,7 +12,7 @@ class ChatBot(commands.Cog):
         self.bot=bot
         self.msgs = {}
         self.remote = database.DB(main="aiconvos.json")
-        with open("src/files/prompt.txt","r") as f:
+        with open("src/bot/files/prompt.txt","r") as f:
             self.base_prompt = f.read()
 
     @commands.Cog.listener()

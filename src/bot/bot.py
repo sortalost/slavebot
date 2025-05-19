@@ -33,7 +33,7 @@ bot.conversation_history = {}
 async def on_ready():
     print("up and running")
     timestamp = int(time.time())
-    with open("src/files/update.txt","r") as f:
+    with open("src/bot/files/update.txt","r") as f:
         update = f.read()
     em = discord.Embed(title=f"Running", color=discord.Color.green())
     em.add_field(name="TIME", value=f"<t:{timestamp}> - <t:{timestamp}:R>")
@@ -69,7 +69,7 @@ async def on_error(event, *args, **kwargs):
         await channel.send(embed=discord.Embed(title=f"error in `{event}`",color=discord.Color.red(),description=f"```\n{error}\n```"))
 
 
-async def main():
+async def run_async():
     async with bot:
         for filename in os.listdir(f"./src/cogs"):
             if filename.endswith(".py"):
@@ -81,5 +81,5 @@ async def main():
                     _vars['r'].append(str(e))
         await bot.start(TOKEN)
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(run_async())

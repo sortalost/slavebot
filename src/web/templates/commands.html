@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} commands {% endblock %}
+
+{% block body %}
+  <h1>Commands</h1>
+  <ul>
+    {% for name, desc in commands.items() %}
+      <li><strong>{{ name }}</strong>: {{ desc }}</li>
+    {% endfor %}
+  </ul>
+  <a href="/">Back to Status</a>
+{% endblock %}

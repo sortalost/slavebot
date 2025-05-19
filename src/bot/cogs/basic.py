@@ -77,7 +77,7 @@ source on [GitHub](<https://github.dev/sortalost/slavebot/>)
 
     @commands.command()
     async def update(self,ctx):
-        with open("src/files/update.txt") as f:
+        with open("src/bot/files/update.txt") as f:
             update = f.read()
         await ctx.send(f"```{update}```")
 

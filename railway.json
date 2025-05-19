@@ -1,11 +1,11 @@
 {
-    "build": {
-      "env": {
-        "PYTHONUNBUFFERED": "1"
-      }
-    },
-    "deploy": {
-      "startCommand": "python3 src/bot.py"
+  "build": {
+    "env": {
+      "PYTHONUNBUFFERED": "1"
     }
+  },
+  "deploy": {
+    "startCommand": "python3 src/main.py"
   }
+}
   
