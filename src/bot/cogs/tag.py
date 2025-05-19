@@ -50,7 +50,7 @@ class Tagging(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.fp = main_bank
-        self.remote = database.DB(main=self.fp)
+        self.remote = database.DB(main="alltags.json")
 
     def disambiguate(self, tag, guild):
         taglist = list(load_all_tags().get(str(guild), {}))
