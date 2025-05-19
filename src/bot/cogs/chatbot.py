@@ -3,7 +3,7 @@ import aiohttp
 import asyncio
 import json
 import os
-from bot.utils import database
+from src.bot.utils import database
 
 
 class ChatBot(commands.Cog):
