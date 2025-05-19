@@ -4,14 +4,14 @@
 
 {% block body %}
   <h1>Commands</h1>
-  <ul>
+  <ol>
     {% for cmd in commands %}
     <li class="cmd">
       <span class="cmd-name">{{ cmd.name }}:</span>
       <span class="cmd-desc">{{ cmd.desc }}</span>
     </li>
     {% endfor %}
-  </ul>
+  </ol>
 
 {% endblock %}
 
