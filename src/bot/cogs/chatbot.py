@@ -64,7 +64,7 @@ class ChatBot(commands.Cog):
             self.remote.push_remote_data(self.bot.conversation_history)
         convolength = len(self.msgs.get(ctx.guild.id))
         self.msgs = {}
-        await ctx.send(f"Conversation Length, {convolength}")
+        await ctx.send(f"Conversation Length, {convolength}. See it [here](<{self.bot.website}/ai/{ctx.author.id}>).")
         # try:
         #     for m in self.msgs.get(ctx.guild.id):
         #         await m.delete()

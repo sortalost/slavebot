@@ -29,6 +29,7 @@ bot = commands.Bot(
 )
 
 bot.conversation_history = {}
+bot.website = "https://slavebot.up.railway.app"
 
 @bot.event
 async def on_ready():
