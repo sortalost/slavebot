@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from src.bot.bot import bot # T_T
 from src.bot.utils import database
 import time
+import json
 
 app = Flask(__name__)
 db = database.DB(main="aiconvos.json")
