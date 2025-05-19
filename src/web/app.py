@@ -41,6 +41,7 @@ def ai_user(user):
         data = db.get_remote_data()
         print("User requested:", repr(user))
         print("Available users:", list(data.keys()))
+        userdata = data[user]
     except KeyError:
-        return "No data, have a conversation with the bot first"
+        return f"No data, have a conversation with the bot first\n{data}"
     return render_template("aiuser.html", conversation=userdata, uid=user)
