@@ -18,6 +18,7 @@ class Help(commands.HelpCommand):
             i+=1
             desc+=f"{str(i)}. `{cog}` - {bot.cogs[cog].description}\n"
         e=discord.Embed(title="Help", color=discord.Color.green())
+        e.description = "[**Website**](https://slavebot.up.railway.app/)\n"
         e.add_field(name="Total", value=f"`{len(bot.all_commands)}`", inline=False)
         e.add_field(name="Categories", value=desc)
         e.set_thumbnail(url="https://cdn.discordapp.com/emojis/1370654693654663288.webp?size=96&animated=true")
@@ -27,7 +28,6 @@ class Help(commands.HelpCommand):
             if not visible_cmds:
                 continue
             embed = discord.Embed(title=cog.qualified_name if cog else "Uncategorized", color=discord.Color.blurple(), description="")
-            embed.description = "[**Website**](https://slavebot.up.railway.app/)\n"
             for command in visible_cmds:
                 if isinstance(command, commands.Group):
                     for sub in command.commands:
