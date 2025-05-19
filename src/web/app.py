@@ -38,10 +38,8 @@ def ai_root():
 @app.route("/ai/<user>")
 def ai_user(user):
     try:
-        data = db.get_remote_data()
-        print("User requested:", repr(user))
-        print("Available users:", list(data.keys()))
-        userdata = data[user]
+        data = eval(json.dumps(db.get_remote_data())))
+        userdata = data[str(user)]
     except KeyError:
-        return f"No data, have a conversation with the bot first\n{data}"
+        return f"No data, have a conversation with the bot first"
     return render_template("aiuser.html", conversation=userdata, uid=user)
