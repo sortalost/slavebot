@@ -5,8 +5,8 @@
 {% block body %}
   <h1>Commands</h1>
   <ul>
-    {% for name, desc in commands.items() %}
-      <li><strong>{{ name }}</strong>: {{ desc }}</li>
+    {% for cmd in commands %}
+      <li><strong>{{ cmd.name }}</strong>: {{ cmd.help }}</li>
     {% endfor %}
   </ul>
   <a href="/">Back to Status</a>

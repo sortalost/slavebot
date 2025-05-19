@@ -74,7 +74,7 @@ async def run_async():
         for filename in os.listdir(f"src/bot/cogs"):
             if filename.endswith(".py"):
                 try:
-                    await bot.load_extension(f"cogs.{filename[:-3]}")
+                    await bot.load_extension(f"src.cogs.{filename[:-3]}")
                     _vars['x'].append(filename[:-3])
                 except Exception as e:
                     _vars['y'].append(filename[:-3])
