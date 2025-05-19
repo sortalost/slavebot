@@ -38,7 +38,7 @@ def ai_root():
 @app.route("/ai/<user>")
 def ai_user(user):
     try:
-        userdata = db.get_remote_data()
+        data = db.get_remote_data()
         print("User requested:", repr(user))
         print("Available users:", list(data.keys()))
     except KeyError:
