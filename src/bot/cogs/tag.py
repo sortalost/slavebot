@@ -1,7 +1,7 @@
 import asyncio
 import discord
 from discord.ext import commands
-from bot.utils import database
+from src.bot.utils import database
 import json 
 from discord.utils import get as g
 import difflib as dfb

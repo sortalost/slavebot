@@ -4,7 +4,7 @@ import traceback
 from contextlib import redirect_stdout
 import discord
 from discord.ext import commands
-from bot.utils.tools import cleanup_code
+from src.bot.utils.tools import cleanup_code
 
 
 class Developer(commands.Cog):

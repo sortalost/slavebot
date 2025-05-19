@@ -5,7 +5,7 @@ import inspect
 import discord
 import platform
 from discord.ext import commands
-from bot.utils.tools import cleanup_code
+from src.bot.utils.tools import cleanup_code
 
 
 class Basic(commands.Cog):
