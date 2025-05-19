@@ -5,7 +5,7 @@
 {% block body %}
   <h1>all users hwo have used ai</h1>
   <ol>
-    {% for uid in data %}
+    {% for uid in users %}
       <li><a href="/ai/{{ uid }}"><strong>{{ uid }}</strong></a></li>
     {% endfor %}
   </ol>
