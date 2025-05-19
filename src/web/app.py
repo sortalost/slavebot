@@ -40,7 +40,7 @@ def ai_root():
 def ai_user(user):
     data = db.get_remote_data()
     try:
-        userdata = data[str(user)]
+        userdata = data[int(user)]
     except KeyError:
         return "No data, have a conversation with the bot first"
     for msg in userdata:
