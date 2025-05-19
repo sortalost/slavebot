@@ -27,6 +27,7 @@ class Help(commands.HelpCommand):
             if not visible_cmds:
                 continue
             embed = discord.Embed(title=cog.qualified_name if cog else "Uncategorized", color=discord.Color.blurple(), description="")
+            embed.description = "[**Website**](https://slavebot.up.railway.app/)"
             for command in visible_cmds:
                 if isinstance(command, commands.Group):
                     for sub in command.commands:

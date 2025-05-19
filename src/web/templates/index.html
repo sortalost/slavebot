@@ -3,9 +3,11 @@
 {% block title %} Bot stats {% endblock %}
 
 {% block body %}
-  <h1>Bot Stats</h1>
-  <p>Uptime: {{ uptime }} seconds</p>
-  <p>Servers: {{ servers }}</p>
-  <p>Users: {{ users }}</p>
-  <a href="/commands">Command List</a>
+<a href="/commands">Command List</a>
+<a href="/ai">chatbot Users</a>
+<hr>
+<h1>Bot Stats</h1>
+<p>Uptime: {{ uptime }} seconds</p>
+<p>Servers: {{ servers }}</p>
+<p>Users: {{ users }}</p>
 {% endblock %}

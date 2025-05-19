@@ -8,6 +8,13 @@ body {
   width: 80%;
 
 }
+a:link {
+  color: yellow;
+}
+
+a:visited {
+  color: rgb(211, 211, 0);
+}
 
 ul {
   padding: 0;
