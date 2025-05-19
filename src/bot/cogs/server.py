@@ -2,7 +2,7 @@ import time
 import aiohttp
 import discord
 from discord.ext import commands
-from utils import database
+from bot.utils import database
 
 
 class Server(commands.Cog):

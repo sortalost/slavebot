@@ -7,7 +7,7 @@ from io import BytesIO
 import Paginator
 import re
 import zlib
-from utils import rtfmutils
+from bot.utils import rtfmutils
 
 
 class RtfmBuildError(Exception):

@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 import datetime
 import time
-from utils.help import Help
+from bot.utils.help import Help
 
 
 TOKEN = os.getenv("TOKEN")
