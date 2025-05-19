@@ -7,8 +7,8 @@
   <ul>
     {% for cmd in commands %}
     <li class="cmd">
-      <span class="cmd-name">{{ name }}:</span>
-      <span class="cmd-desc">{{ desc }}</span>
+      <span class="cmd-name">{{ cmd.name }}:</span>
+      <span class="cmd-desc">{{ cmd.desc }}</span>
     </li>
     {% endfor %}
   </ul>
