@@ -6,7 +6,10 @@
   <h1>Commands</h1>
   <ul>
     {% for cmd in commands %}
-      <li><strong>{{ cmd.name }}</strong>: {{ cmd.help }}</li>
+    <li class="cmd">
+      <span class="cmd-name">{{ name }}:</span>
+      <span class="cmd-desc">{{ desc }}</span>
+    </li>
     {% endfor %}
   </ul>
 

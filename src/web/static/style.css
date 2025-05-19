@@ -36,3 +36,20 @@ strong {
 .bot {
   color: #81c784;
 }
+
+.cmd {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+
+.cmd-name {
+  min-width: 120px;
+  font-weight: bold;
+  color: rgb(81, 249, 255);
+}
+
+.cmd-desc {
+  color: rgb(223, 223, 223);
+}
