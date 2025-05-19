@@ -2,3 +2,4 @@ discord.py
 discord.py-pagination
 PyGithub
 requests
+flask
