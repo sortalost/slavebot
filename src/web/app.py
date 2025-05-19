@@ -24,3 +24,4 @@ def commands():
         for cmd in bot.commands if not cmd.hidden
     ]
     return render_template("commands.html", commands=commands_list)
+
