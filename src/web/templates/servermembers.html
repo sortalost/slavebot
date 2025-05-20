@@ -6,7 +6,7 @@
   <h1>{{ guild.name }} - {{ total }} Members</h1>
   <ul>
     {% for member in members %}
-      <li>{{ member }}</li>
+      <li>{{ member | safe }}</li>
     {% endfor %}
   </ul>
 {% endblock %}
