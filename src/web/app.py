@@ -33,13 +33,13 @@ def commands():
 def ai_root():
     data = db.get_remote_data()
     uid = list(data)
-    uname = []
+    allusers = {}
     for u in uid:
         try:
-            uname.append(bot.get_user(u).name)
+            allusers.update({u:{'name':bot.get_user(u).name,'_id':u}})
         except:
-            uname.append(u)
-    return render_template("airoot.html", users=uname, uid=uid)
+            uname.update({u:{'name':u,'_id':u}})
+    return render_template("airoot.html", users=uname)
 
 
 @app.route("/ai/<user>")
@@ -49,6 +49,8 @@ def ai_user(user):
         userdata = data[int(user)]
     except KeyError:
         return "No data, have a conversation with the bot first"
+    except Exception as e:
+        return str(e)
     for msg in userdata:
         text = msg.get('text', '')
         if not isinstance(text, str):

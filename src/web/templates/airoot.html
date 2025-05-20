@@ -3,11 +3,11 @@
 {% block title %} AI Root {% endblock %}
 
 {% block body %}
-  <h1>all users who have used ai</h1>
+  <h1>all users who have used <code>.chatbot</code></h1>
   <p><small>Find ID using <code>.serverinfo</code></small></p>
   <ol>
-    {% for uid in users %}
-      <li><a href="/ai/{{ uid }}"><strong>{{ uname }}</strong></a></li>
+    {% for u in users %}
+      <li><a href="/ai/{{ u['_id'] }}"><strong>{{ u['name'] }}</strong></a></li>
     {% endfor %}
   </ol>
 
