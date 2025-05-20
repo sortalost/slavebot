@@ -80,7 +80,7 @@ source on [GitHub](<https://github.dev/sortalost/slavebot/>)
     async def update(self,ctx):
         with open("src/bot/files/update.txt") as f:
             update = f.read()
-        await ctx.send(f"```{update}```")
+        await ctx.send(f"```diff\n{update}\n```")
 
 async def setup(bot):
     await bot.add_cog(Basic(bot))
