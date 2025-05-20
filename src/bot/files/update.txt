@@ -1,1 +1,2 @@
-ordered list in commands in website
+- display usernames instead of id in website/ai
+- added .userinfo command

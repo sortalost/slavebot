@@ -249,6 +249,40 @@ class Utils(commands.Cog):
                 color=discord.Color.dark_theme(),
                 timestamp=ctx.message.created_at).set_footer(text=ctx.author.name,icon_url=ctx.author.avatar)
             )
+    
+
+    @commands.command(aliases=["ui"])
+    async def userinfo(self, ctx, user: discord.User):
+        """Get a user's info"""
+        member = ctx.guild.get_member(user.id) if ctx.guild else None
+        is_member = isinstance(member, discord.Member)
+
+        embed = discord.Embed(
+            title=f"Info on {user}",
+            color=discord.Color.blurple()
+        )
+        embed.set_thumbnail(url=user.display_avatar.url)
+        embed.add_field(name="Username", value=f"{user}", inline=True)
+        embed.add_field(name="ID", value=user.id, inline=True)
+        embed.add_field(name="Bot?", value=user.bot, inline=True)
+
+        if is_member:
+            embed.description = "Here's what I know:"
+            embed.add_field(name="Nickname", value=member.nick or "None", inline=True)
+            embed.add_field(name="Joined Server", value=member.joined_at.strftime('%Y-%m-%d %H:%M:%S'), inline=True)
+            embed.add_field(name="Account Created", value=user.created_at.strftime('%Y-%m-%d %H:%M:%S'), inline=True)
+            embed.add_field(name="Top Role", value=member.top_role.mention, inline=True)
+            embed.add_field(name="Roles", value=", ".join(r.mention for r in member.roles[1:]) or "None", inline=False)
+            embed.add_field(name="Boosting Since", value=member.premium_since.strftime('%Y-%m-%d %H:%M:%S') if member.premium_since else "Not Boosting", inline=True)
+            embed.add_field(name="Status", value=str(member.status).title(), inline=True)
+            embed.add_field(name="Activity", value=member.activity.name if member.activity else "None", inline=True)
+        else:
+            embed.description = "idk this guy"
+            embed.add_field(name="Account Created", value=user.created_at.strftime('%Y-%m-%d %H:%M:%S'), inline=True)
+            flags = [str(flag).split('.')[-1] for flag in user.public_flags.all()]
+            embed.add_field(name="Badges", value=", ".join(flags) if flags else "None", inline=False)
+
+        await ctx.send(embed=embed)
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Utils(bot))
