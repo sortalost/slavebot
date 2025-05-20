@@ -38,7 +38,7 @@ def ai_root():
         try:
             allusers.update({u:{'name':bot.get_user(u).name,'_id':u}})
         except:
-            uname.update({u:{'name':u,'_id':u}})
+            allusers.update({u:{'name':u,'_id':u}})
     return render_template("airoot.html", users=allusers)
 
 
