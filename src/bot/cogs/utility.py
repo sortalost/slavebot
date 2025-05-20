@@ -265,7 +265,6 @@ class Utils(commands.Cog):
         embed.add_field(name="Username", value=f"{user}", inline=True)
         embed.add_field(name="ID", value=user.id, inline=True)
         embed.add_field(name="Bot?", value=user.bot, inline=True)
-        embed.add_field(name="Badges", value=", ".join(badges) if badges else "None", inline=False)
 
         if is_member:
             badges = [str(flag).split('.')[-1] for flag in member.public_flags.all()]

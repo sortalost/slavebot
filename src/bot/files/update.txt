@@ -1,1 +1,2 @@
 + show badges in .userinfo
+- remove asyncio smh

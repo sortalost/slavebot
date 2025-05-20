@@ -3,7 +3,6 @@ from src.bot.bot import bot # T_T
 from src.bot.utils import database
 import time
 import json
-import asyncio 
 
 app = Flask(__name__)
 db = database.DB(main="aiconvos.json")
@@ -36,7 +35,10 @@ def ai_root():
     uid = list(data)
     uname = []
     for u in uid:
-        uname.append(asyncio.run(bot.fetch_user(u))) # this is blocking the thread, need a workaround
+        try:
+            uname.append(bot.get_user(u).name)
+        except:
+            uname.append(u)
     return render_template("airoot.html", users=uname, uid=uid)
 
 
