@@ -50,7 +50,7 @@ class Basic(commands.Cog):
 {"".join(src)}
 ```
 
-source on [GitHub](<https://github.dev/sortalost/slavebot/>)
+source on [GitHub](<https://github.com/sortalost/slavebot/blob/main/src/{_file}#L{line}>)
         """
         em = discord.Embed(description=desc)
         em.timestamp=discord.utils.utcnow()
