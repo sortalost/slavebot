@@ -7,8 +7,7 @@
   <p><small>Find ID using <code>.serverinfo</code></small></p>
   <ol>
     {% for u in users %}
-      <li><a href="/ai/{{ u['_id'] }}"><strong>{{ u['name'] }}</strong></a></li>
-      <p>{{ u }}</p>
+      <li><a href="/ai/{{ users[u]['_id'] }}"><strong>{{ users[u]['name'] }}</strong></a></li>
     {% endfor %}
   </ol>
 
