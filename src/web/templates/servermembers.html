@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ guild.name }} - {{ total }} Members {% endblock %}
+
+{% block body %}
+  <h1>{{ guild.name }} - {{ total }} Members</h1>
+  <ul>
+    {% for member in members %}
+      <li>{{ member }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+{% block footer %}
+<a href="/server">Back to servers</a>
+{% endblock %}

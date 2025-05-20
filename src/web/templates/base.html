@@ -5,11 +5,17 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body class="container">
+    [ <a href="/commands">Command list</a> ]
+    [ <a href="/ai">chatbot users</a>] 
+    <hr>
     {% block body %}
     {% endblock %}
     <footer>
         {% block footer %}
         {% endblock %}
+        <hr>
+        <p>SlaveBot, 1993</p>
+        <a href="https://github.com/sortalost/slavebot">github</a>
     </footer>
 </body>
 </html>

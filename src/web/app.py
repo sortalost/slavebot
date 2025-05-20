@@ -59,3 +59,30 @@ def ai_user(user):
             text = text.encode('utf-8', 'ignore').decode('utf-8')
         msg['text'] = text
     return render_template("aiuser.html", conversation=userdata, uid=user)
+
+
+@app.route("/ai")
+def _ai():
+    data = db.get_remote_data()
+    uid = list(data)
+    allusers = {}
+    for u in uid:
+        try:
+            allusers.update({u:{'name':bot.get_user(u).name,'_id':u}})
+        except:
+            allusers.update({u:{'name':u,'_id':u}})
+    return render_template("ai.html", users=allusers)
+
+
+@app.route("/server")
+def server_list():
+    guilds = list(bot.guilds)
+    return render_template("servers.html", guilds=guilds, total=len(guilds))
+
+@app.route("/server/<int:server_id>")
+def server_members(server_id):
+    guild = discord.utils.get(bot.guilds, id=server_id)
+    if not guild:
+        return "Server not found"
+    members = [f"{m.name}#{m.discriminator} (bot)" if m.bot else f"{m.name}#{m.discriminator}" for m in guild.members]
+    return render_template("servermembers.html", members=members, total=len(members), guild=guild)
