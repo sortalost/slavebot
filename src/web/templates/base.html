@@ -5,13 +5,15 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body class="container">
-    [ <a href="/commands">Command list</a> ]
-    [ <a href="/ai">chatbot users</a>] 
-    [ <a href="/server">servers</a>] 
+    <div>
+        [ <a href="/commands">command list</a> ]
+        [ <a href="/ai">chatbot users</a> ] 
+        [ <a href="/server">servers</a> ]
+    </div>
     <hr>
     {% block body %}
     {% endblock %}
-    <footer>
+    <footer style="text-align:right">
         {% block footer %}
         {% endblock %}
         <hr>
