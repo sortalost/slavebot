@@ -39,7 +39,7 @@ def ai_root():
             allusers.update({u:{'name':bot.get_user(u).name,'_id':u}})
         except:
             uname.update({u:{'name':u,'_id':u}})
-    return render_template("airoot.html", users=uname)
+    return render_template("airoot.html", users=allusers)
 
 
 @app.route("/ai/<user>")
