@@ -32,9 +32,10 @@ class Basic(commands.Cog):
     async def uptime(self, ctx, r="R"):
         """how long the bot has been running for"""
         seconds = int(time.time() - self.start_time)
+        days, seconds = divmod(seconds, 86400)
         hours, seconds = divmod(seconds, 3600)
         minutes, seconds = divmod(seconds, 60)
-        em = discord.Embed(description=f"🕒 **Uptime**: `{hours}h {minutes}m {seconds}s`\n📅 **Since**: <t:{int(self.start_time)}:{r}>")
+        em = discord.Embed(description=f"🕒 **Uptime**: `{days}days {hours}h {minutes}m {seconds}s`\n📅 **Since**: <t:{int(self.start_time)}:{r}>")
         await ctx.send(embed=em)
 
     @commands.command(aliases=['src'])

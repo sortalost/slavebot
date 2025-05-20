@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from src.bot.bot import bot # T_T
 from src.bot.utils import database
 import time
@@ -11,10 +11,19 @@ start_time = time.time()
 
 @app.route("/")
 def index():
-    uptime = round(time.time() - start_time)
+    seconds = round(time.time() - start_time)
+    days, seconds = divmod(seconds, 86400)
+    hours, seconds = divmod(seconds, 3600)
+    minutes, seconds = divmod(seconds, 60)
     servers = len(bot.guilds)
     users = sum(g.member_count for g in bot.guilds)
-    return render_template("index.html", uptime=uptime, servers=servers, users=users)
+    return render_template("index.html", uptime=f"{days}days {hours}h {minutes}m {seconds}s", servers=servers, users=users)
+
+
+@app.route("/invite")
+def invite():
+    return redirect(discord.utils.oauth_url(bot.user.id))
+
 
 @app.route("/commands")
 def commands():
