@@ -265,20 +265,23 @@ class Utils(commands.Cog):
         embed.add_field(name="Username", value=f"{user}", inline=True)
         embed.add_field(name="ID", value=user.id, inline=True)
         embed.add_field(name="Bot?", value=user.bot, inline=True)
+        embed.add_field(name="Badges", value=", ".join(badges) if badges else "None", inline=False)
 
         if is_member:
+            badges = [str(flag).split('.')[-1] for flag in member.public_flags.all()]
             embed.description = "Here's what I know:"
             embed.add_field(name="Nickname", value=member.nick or "None", inline=True)
-            embed.add_field(name="Joined Server", value=member.joined_at.strftime('%Y-%m-%d %H:%M:%S'), inline=True)
-            embed.add_field(name="Account Created", value=user.created_at.strftime('%Y-%m-%d %H:%M:%S'), inline=True)
+            embed.add_field(name="Joined Server", value=f"<t:{int(member.joined_at.timestamp())}:R>", inline=True)
+            embed.add_field(name="Account Created", value=f"<t:{int(member.created_at.timestamp())}:R>", inline=True)
             embed.add_field(name="Top Role", value=member.top_role.mention, inline=True)
             embed.add_field(name="Roles", value=", ".join(r.mention for r in member.roles[1:]) or "None", inline=False)
+            embed.add_field(name="Badges", value=", ".join(badges) if badges else "None", inline=False)
             embed.add_field(name="Boosting Since", value=member.premium_since.strftime('%Y-%m-%d %H:%M:%S') if member.premium_since else "Not Boosting", inline=True)
             embed.add_field(name="Status", value=str(member.status).title(), inline=True)
             embed.add_field(name="Activity", value=member.activity.name if member.activity else "None", inline=True)
         else:
             embed.description = "idk this guy"
-            embed.add_field(name="Account Created", value=user.created_at.strftime('%Y-%m-%d %H:%M:%S'), inline=True)
+            embed.add_field(name="Account Created", value=f"<t:{int(user.created_at.timestamp())}:R>", inline=True)
             flags = [str(flag).split('.')[-1] for flag in user.public_flags.all()]
             embed.add_field(name="Badges", value=", ".join(flags) if flags else "None", inline=False)
 

@@ -1,2 +1,1 @@
-- display usernames instead of id in website/ai
-- added .userinfo command
++ show badges in .userinfo
