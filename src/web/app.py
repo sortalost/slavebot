@@ -3,6 +3,7 @@ from src.bot.bot import bot # T_T
 from src.bot.utils import database
 import time
 import json
+import discord
 
 app = Flask(__name__)
 db = database.DB(main="aiconvos.json")
