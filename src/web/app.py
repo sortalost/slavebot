@@ -4,6 +4,7 @@ from src.bot.utils import database
 import time
 import json
 import discord
+import os
 
 app = Flask(__name__)
 db = database.DB(main="aiconvos.json")
@@ -83,3 +84,7 @@ def server_members(server_id):
         return "Server not found"
     members = [f"{m.name}#{m.discriminator} (bot)" if m.bot else f"<strong>{m.name}</strong>" for m in guild.members]
     return render_template("servermembers.html", members=members, total=len(members), guild=guild)
+
+
+if __name__=="__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
