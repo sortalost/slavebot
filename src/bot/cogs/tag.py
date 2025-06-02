@@ -167,7 +167,7 @@ class Tagging(commands.Cog):
         if tags:
             await ctx.send(embed=discord.Embed(description="** , **".join(tags)))
         else:
-            await ctx.send(embed=discord.Embed(description=f"No tags {g(self.bot.emojis, name='shhAngryUS')}"))
+            await ctx.send(embed=discord.Embed(description=f"No tags"))
 
 
 async def setup(bot):

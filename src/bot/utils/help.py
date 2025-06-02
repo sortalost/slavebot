@@ -1,7 +1,9 @@
 from discord.ext import commands
 import discord
 import Paginator
+import os
 
+WEBSITE = os.getenv("WEBSITE")
 
 class Help(commands.HelpCommand):
     def __init__(self, no=[]):
@@ -18,7 +20,7 @@ class Help(commands.HelpCommand):
             i+=1
             desc+=f"{str(i)}. `{cog}` - {bot.cogs[cog].description}\n"
         e=discord.Embed(title="Help", color=discord.Color.green())
-        e.description = "[**Website**](https://slavebot.up.railway.app/)\n"
+        e.description = f"[**Website**]({WEBSITE})\n"
         e.add_field(name="Total", value=f"`{len(bot.all_commands)}`", inline=False)
         e.add_field(name="Categories", value=desc)
         e.set_thumbnail(url="https://cdn.discordapp.com/emojis/1370654693654663288.webp?size=96&animated=true")

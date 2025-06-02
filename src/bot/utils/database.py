@@ -4,16 +4,17 @@ from github import *
 import os
 
 
-
 GITHUB_TOKEN = os.getenv('GITHUBTK')
-REPO = "junkyard"
+REPO = os.getenv("REPO")
+OWNER = os.getenv("OWNER")
+EMAIL = str(os.getenv('EMAIL'))
 
 
 class DB:
-    def __init__(self,token=GITHUB_TOKEN, branch="master",author=("sortalost",".."),reponame=f"sortalost/{REPO}", main="main.json"):
+    def __init__(self,token=GITHUB_TOKEN, branch="master",author=(OWNER, EMAIL), reponame=f"{OWNER}/{REPO}", main="main.json"):
         self.token=token
         self.branch=branch
-        self.author=InputGitAuthor("sortalost",str(os.getenv('email')))
+        self.author=InputGitAuthor(OWNER, EMAIL)
         self.github=Github(self.token)
         self.repo=self.github.get_repo(reponame)
         self.main=main

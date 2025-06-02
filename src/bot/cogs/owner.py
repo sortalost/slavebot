@@ -8,7 +8,7 @@ from src.bot.utils.tools import cleanup_code
 
 
 class Developer(commands.Cog):
-    """only for the developer <:ver_devUS:869794681251332177>"""
+    """only for the developer"""
     def __init__(self, bot):
         self.bot = bot
         self._last_result = None
@@ -16,7 +16,7 @@ class Developer(commands.Cog):
     @commands.command(pass_context=True, aliases=['dds'])
     @commands.is_owner()
     async def dodis(self, ctx, *, body: str):
-        """Evaluates a code."""
+        """Evaluates a piece of code."""
         env = {
             'bot': self.bot,
             'ctx': ctx,

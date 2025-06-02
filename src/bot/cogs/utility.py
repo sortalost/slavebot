@@ -7,7 +7,9 @@ from io import BytesIO
 import Paginator
 import re
 import zlib
+import os
 from src.bot.utils import rtfmutils
+from src.bot.utils import database
 
 
 class RtfmBuildError(Exception):
@@ -19,7 +21,7 @@ class Utils(commands.Cog):
     
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.logchannel = bot.get_channel(877473404117209191)
+        self.logchannel = bot.get_channel(bot.LOG)
         self.lastmsg = {}
         self.targets = {"python": "https://docs.python.org/3", "discord": "https://discordpy.readthedocs.io/en/latest/"}
         self.rtfmaliases = {
@@ -27,6 +29,7 @@ class Utils(commands.Cog):
             ("discord","d","dpy"): "discord",
         }
         self.cache = {}
+        self.remote = database.DB(main="wakewords.json")
 
 
     async def build(self, target) -> None:
@@ -81,7 +84,7 @@ class Utils(commands.Cog):
         try:
             num = int(number)
         except:
-            return await ctx.send(f"Usage is `{ctx.prefix}purge 16` to delete last 16 messages")
+            return await ctx.send(f"Usage is `{ctx.prefix}purge 16` to delete last 16 messages", delete_after=10)
         num = num + 1
         await ctx.channel.purge(limit=num)
 
@@ -285,6 +288,43 @@ class Utils(commands.Cog):
             embed.add_field(name="Badges", value=", ".join(flags) if flags else "None", inline=False)
 
         await ctx.send(embed=embed)
+
+
+    @commands.Cog.listener()
+    async def on_message(self,msg):
+        if msg.author.bot:
+            return
+        guildwords = self.remote.get_remote_data()[msg.guild.id]
+        ctx = await self.bot.get_context(msg)
+        if msg.content.lower() in list(guildwords):
+            return await ctx.reply(guildwords[msg.content.lower()])
+    
+
+    @commands.command(aliases=['ww'])
+    async def wakeword(self,ctx,word:str,*,reply:str):
+        words = self.remote.get_remote_data()
+        try:
+            words[ctx.guild.id][word] = reply
+        except KeyError:
+            words.update({ctx.guild.id:{word:reply}})
+        self.remote.push_remote_data(words)
+        await ctx.send(f"Added `{word}`. Total `{len(list(words[ctx.guild.id]))}`.")
+
+
+    @commands.command(aliases=['lw'])
+    async def listwakewords(self,ctx):
+        words = self.remote.get_remote_data()
+        try:
+            guildwords = words[ctx.guild.id]
+        except KeyError:
+            words.update({ctx.guild.id:{}})
+            return await ctx.send("initialized")
+        if list(guildwords)==[]:
+            return await ctx.send("None. Setup using `.wakeword [word] [response]`")
+        await ctx.send(", ".join(guildwords))
+
+
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Utils(bot))

@@ -20,7 +20,7 @@ class ChatBot(commands.Cog):
         self.bot.conversation_history = self.remote.get_remote_data()
 
     async def get(self, input_text: str, specific_user: str):
-        api_url = os.getenv('chatapiurl')
+        api_url = os.getenv('CHATAPI')
         headers = {"Content-Type": "application/json"}
         if specific_user not in self.bot.conversation_history:
             self.bot.conversation_history[specific_user] = []

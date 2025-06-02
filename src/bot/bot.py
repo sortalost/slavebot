@@ -9,7 +9,6 @@ from src.bot.utils.help import Help
 
 
 TOKEN = os.getenv("TOKEN")
-LOG = 1373342896501297273
 prefix = "."
 _vars = {
     'x':[],
@@ -23,13 +22,14 @@ bot = commands.Bot(
     command_prefix=commands.when_mentioned_or(prefix),
     case_insensitive=True,
     help_command=Help(),
-    owner_id=817359568945545226,
+    owner_id=os.getenv("OWNER_ID"),
     intents=intents,
     strip_after_prefix=True
 )
 
 bot.conversation_history = {}
-bot.website = "https://slavebot.up.railway.app"
+bot.website = os.getenv("WEBSITE")
+bot.LOG = os.getenv("LOG_CHANNEL")
 
 @bot.event
 async def on_ready():
@@ -46,12 +46,12 @@ async def on_ready():
     **- Errors:** {', '.join(_vars['y'])}
     **- Reasons:** {' | '.join(_vars['r'])}
     """
-    await bot.get_channel(LOG).send(embed=em)
+    await bot.get_channel(bot.LOG).send(embed=em)
 
 
 @bot.event
 async def on_message(message):
-    if message.author==bot.user:
+    if message.author.bot:  # oopsies
         return
     await bot.process_commands(message)
 
@@ -65,7 +65,7 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_error(event, *args, **kwargs):
-    channel = bot.get_channel(1373342896501297273)
+    channel = bot.get_channel(bot.LOG)
     if channel:
         error = traceback.format_exc()
         await channel.send(embed=discord.Embed(title=f"error in `{event}`",color=discord.Color.red(),description=f"```\n{error}\n```"))
