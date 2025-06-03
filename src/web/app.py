@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect
-from src.bot.bot import bot # T_T
+from src.bot.bot_core import bot # T_T =(
 from src.bot.utils import database
 import time
 import json
