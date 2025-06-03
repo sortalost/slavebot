@@ -5,7 +5,7 @@
     }
   },
   "deploy": {
-    "startCommand": "python3 -m src.main"
+    // "startCommand": "python3 -m src.main"
   }
 }
   
