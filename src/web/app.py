@@ -90,5 +90,7 @@ def server_members(server_id):
 def inject():
     return {'github_src': os.getenv('GITHUBSRC')}
 
-if __name__=="__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
+# service: comment out for railway
+# if __name__=="__main__":
+#     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

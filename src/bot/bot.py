@@ -83,6 +83,6 @@ async def run_async():
                     _vars['r'].append(str(e))
         await bot.start(TOKEN)
 
-# comment out for railway;
-if __name__ == "__main__":
-    asyncio.run(run_async())
+# service: comment out for railway
+# if __name__ == "__main__":
+#     asyncio.run(run_async())
